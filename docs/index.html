@@ -410,6 +410,19 @@
       if (tab === 'production') renderProductionView();
     }
 
+    
+    function extractDriveId(val) {
+      if (!val || typeof val !== 'string') return '';
+      const str = val.trim();
+      if (str === '-' || str.endsWith('.jpg') || str.endsWith('.png') || str.endsWith('.jpeg')) {
+        return '';
+      }
+      const match = str.match(/\/d\/([a-zA-Z0-9_-]{25,})/);
+      if (match) return match[1];
+      if (/^[a-zA-Z0-9_-]{25,}$/.test(str)) return str;
+      return '';
+    }
+
     // 2. LIVE FETCH FROM GOOGLE SHEETS (GVIZ ENDPOINT)
     async function syncLiveFromGoogleSheets() {
       const syncBtn = document.getElementById('btnSync');
