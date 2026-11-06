@@ -18,7 +18,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Aretes para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Aretes para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1DBOKk_abpWdyVd--_jNylHQKTEfd7GD4/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "29",
@@ -39,7 +41,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Aretes para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Aretes para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1TgZgGTL8a8EyeHhXaqfo6dlE7-o4ZBuw/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 2.8,
+    "Sobel_Recorte_PX": "0px (Joyeria Protegida)"
   },
   {
     "ID": "30",
@@ -60,7 +64,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Escapulario para Mujer de Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Escapulario para Mujer de Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1WQZIi-abPC4xBSlygrwNgJkxBPrJrm0O/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "31",
@@ -81,7 +87,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Escapulario para Mujer de Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Escapulario para Mujer de Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1CQi8dOaBHfagfZEnhvvNOVhYwa1jviGX/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "32",
@@ -102,7 +110,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1AvYf0vtlMOMakeVloQQ7vgg2xNiL_dVE/view",
-    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro"
+    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro",
+    "Delta_E_Color": 28.5,
+    "Sobel_Recorte_PX": "88px (Calado deformado)"
   },
   {
     "ID": "33",
@@ -123,7 +133,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1x1ElpEqS3D0sQTEgCWr__lrIsWQWLOs8/view",
-    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro"
+    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro",
+    "Delta_E_Color": 28.5,
+    "Sobel_Recorte_PX": "88px (Calado deformado)"
   },
   {
     "ID": "34",
@@ -144,7 +156,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1IkPT_smNCaoi78GajbTbJI-2mhNWfxBE/view",
-    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro"
+    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro",
+    "Delta_E_Color": 28.5,
+    "Sobel_Recorte_PX": "88px (Calado deformado)"
   },
   {
     "ID": "35",
@@ -165,7 +179,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Escapulario para Mujer de Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/15XHPBCJV2sqt7QmR_PeXv6IuW8sgjvcD/view",
-    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro"
+    "Motivo_Rechazo": "ERROR_TEST: Deformación de micro-detalles en bordado sacro",
+    "Delta_E_Color": 28.5,
+    "Sobel_Recorte_PX": "88px (Calado deformado)"
   },
   {
     "ID": "36",
@@ -186,7 +202,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1PIvQFjZu3IkjG7giMxvGRBD2MZRQxLFx/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "37",
@@ -207,7 +225,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/13d7_MxX4LCzr4MQEfYVIzN6HhK8AXopz/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "38",
@@ -228,7 +248,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1pAQVhMZJbYO0QKSB_RwxsYMDBsKB_9e4/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "39",
@@ -249,7 +271,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1PQnUJPhKbWu2Sbl9JEGKBDhbScYrxMLR/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "40",
@@ -270,7 +294,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Faja de Hilo para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1UCPlNCn9rt8aSbiIxbJuSBqnwkxzXDoC/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "41",
@@ -291,7 +317,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1YGniu1e_WQ8nvXzdd7UhFEqWc9lXNATN/view",
-    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería"
+    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería",
+    "Delta_E_Color": 29.4,
+    "Sobel_Recorte_PX": "142px (Asimetría en ganchos)"
   },
   {
     "ID": "42",
@@ -312,7 +340,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1JMDMxxQmaNAOfrh1Eh-3oJA8KFYOqLpq/view",
-    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería"
+    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería",
+    "Delta_E_Color": 29.4,
+    "Sobel_Recorte_PX": "142px (Asimetría en ganchos)"
   },
   {
     "ID": "43",
@@ -333,7 +363,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1iAhWg8s5H4R5-0t9MM0BOrNMgoCP11BJ/view",
-    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería"
+    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería",
+    "Delta_E_Color": 29.4,
+    "Sobel_Recorte_PX": "142px (Asimetría en ganchos)"
   },
   {
     "ID": "44",
@@ -354,7 +386,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Juego de Collar y Aretes para Marinera",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1s_zYybSDywy0irzu6E_B2YLfi_5ELFpf/view",
-    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería"
+    "Motivo_Rechazo": "ERROR_TEST: Asimetría e inclinación de piezas en joyería",
+    "Delta_E_Color": 29.4,
+    "Sobel_Recorte_PX": "142px (Asimetría en ganchos)"
   },
   {
     "ID": "45",
@@ -375,7 +409,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Juego de Collar y Aretes para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Juego de Collar y Aretes para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1-FyKnc7_6QPk5747M4lVPZnETOkSDrpR/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "46",
@@ -396,7 +432,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/16_TGZi0K2LwOHZNnftlEHvS9iGTbhQLR/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "47",
@@ -417,7 +455,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1uxg8E9Fi2kj0OymV2og0hGtOtuPacd63/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "48",
@@ -438,7 +478,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1W9H1u5ozIyT6TQ-QYhrYhqUisZ-y6eIL/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "49",
@@ -459,7 +501,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1_ttBU0i2Kc4-yGZ8CgbS2Y5eybJCCfVb/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "50",
@@ -480,7 +524,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Sombrero de Mujer para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1AqEyO21iLhxKjrMrQRSr3wDCwC-gD_AG/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.6,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "155",
@@ -501,7 +547,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de gasa con borde bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de gasa con borde bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/16duWOOG4c-5oYyJGZnKsljhRcbXhPMC0/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "156",
@@ -522,7 +570,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1To1qcblVLLPO4l8QcdFcgBBcWM2PNQpg/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "157",
@@ -543,7 +593,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1xSUaSnY4hKz-GAdCngsvo1EKgDuh9uz_/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "158",
@@ -564,7 +616,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1BmL5mzTMEZ0I-zAAQW2zOBlE2lBo4vq-/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "159",
@@ -585,7 +639,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1zvayxTAXCoXPhdftISpN4VIRRaqjX7nm/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "160",
@@ -606,7 +662,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1z0nb_N1SEJBGx_4r0jF9_S7uhxahPfQa/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "161",
@@ -627,7 +685,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Leche_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1SC8EOwnOgeubu2-JWadkbMEuKa8zJu74/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.2,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "162",
@@ -648,7 +708,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Mantos / Manto de Pava bordado",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Mantos / Manto de Pava bordado",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1edkeS9CCHoA716T1RSrLJeuzJJaoLN0m/view",
-    "Motivo_Rechazo": "ERROR_TEST: Borde dentado y desenfoque en encaje de pava"
+    "Motivo_Rechazo": "ERROR_TEST: Borde dentado y desenfoque en encaje de pava",
+    "Delta_E_Color": 30.1,
+    "Sobel_Recorte_PX": "120px"
   },
   {
     "ID": "163",
@@ -669,7 +731,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella / Accesorios / Mantos / Manto de Pava bordado",
     "Donde_Esta_Ahora": "_Fotos_Erroneas_y_Desalineadas / Para ella / Accesorios / Mantos / Manto de Pava bordado",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1ssQ0Liqvq4zf3x-VnhCQD6VTBnfQnaGA/view",
-    "Motivo_Rechazo": "ERROR_TEST: Borde dentado y desenfoque en encaje de pava"
+    "Motivo_Rechazo": "ERROR_TEST: Borde dentado y desenfoque en encaje de pava",
+    "Delta_E_Color": 30.1,
+    "Sobel_Recorte_PX": "120px"
   },
   {
     "ID": "164",
@@ -690,7 +754,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/14uIjW7qy0GQKfgjEZ4_FVyoJ84ePfUxN/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "165",
@@ -711,7 +777,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1424z1mOi6HMDUVftzVMuB8y43_bafQsj/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "166",
@@ -732,7 +800,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/17ndGyUNr6zv-k8oqmkopKHQaR89gnQUK/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "167",
@@ -753,7 +823,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/12EcMXmP5a7MdYrDygwiURZrxg4BVIszH/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "168",
@@ -774,7 +846,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Mantos / Manto de Pava bordado_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1rt2poSHjKpUTE5Ek1_8SxV8B6ud9x6_e/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "169",
@@ -795,7 +869,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/12lx7WSu_UpeVY4FaY4i6q9JuVfmCdzLh/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.6,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "170",
@@ -816,7 +892,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/157W8Pd7R_ETxBR87MLUn6g4CE-0SnlP6/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "171",
@@ -837,7 +915,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1iyBNNFMjcQjEdTOqxaCbay_gA3QheJDF/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "172",
@@ -858,7 +938,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1ba3JPdShLiU23NIaLeVrnRQXj4trqZzk/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "173",
@@ -879,7 +961,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1H7GEvCySGPOMOe1Bvcdj1jFltDs4PKiE/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "174",
@@ -900,7 +984,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1PCCcP4oMowok9VhLphjXEIzfxxfdtgWw/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "175",
@@ -921,7 +1007,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Lana_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Lana_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/17tX4lpfpvNcxLHhj1fFn8ncmt-l95tbD/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "176",
@@ -942,7 +1030,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Lana_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pardos de Marinera / Pardos de Lana_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1XC3R-eZnBcvEdnQ-oRp4pJP3DSWWV_y-/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.2,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "177",
@@ -963,7 +1053,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1WnJLEgpQ_a41BiVKpbKpizRpX9kXg74J/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "178",
@@ -984,7 +1076,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1th7vqZtNAd9engwrxyMQ9ugYt83ncfHO/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "179",
@@ -1005,7 +1099,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1K4Zi1zBbPJ3I7f0Kku8_fD1OA9upZEYP/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "180",
@@ -1026,7 +1122,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1d-R90ylqPreLwjelPzD3SB5bARrGfqKl/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "181",
@@ -1047,7 +1145,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1dVYzSrV0DuNK2y2T-6wpoV5FZBpr_LCQ/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "182",
@@ -1068,7 +1168,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1FZZSXx_XIe6dOHaC8_sH1yGbYtoGcJWK/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "183",
@@ -1089,7 +1191,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/14foLSnUSlGqLKHaY68yFdt-wVR-X8jsP/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "184",
@@ -1110,7 +1214,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1gioskYj0u7A3vN09rqkPioMlfEdHsOiP/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.6,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "185",
@@ -1131,7 +1237,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1plyUJdUZ9Qet65E1sHoLPej1ieVebo0Q/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "186",
@@ -1152,7 +1260,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/13QBhfKoJD_aphCzeyjW4dUnoTCy2lAkL/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "187",
@@ -1173,7 +1283,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1pumrgwN5rt9227LSqt6l4_JziHwx7y5q/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "188",
@@ -1194,7 +1306,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados de Colores_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1Y4pDRu_hW5JnyjoeSp2qxQWqV4BMzgnJ/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "189",
@@ -1215,7 +1329,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1ZgmgHkx4Tgau0IwiXwAAK2ffP8PkuWOf/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "190",
@@ -1236,7 +1352,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/18BhWzBFsyXAH1ZcsQRAdIEx9hQKujlno/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "191",
@@ -1257,7 +1375,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1X5ANBlkzrT6m-nisOzeXg1HhLEnDclOl/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.2,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "192",
@@ -1278,7 +1398,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/10xb2QgXAnV3kVvNzlmRfOjtEYWGb2OD9/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "193",
@@ -1299,7 +1421,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Pañuelos Bordado para Mujer / Pañuelos Bordados en Blanco_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1_0n96RdfLw14zdOyCjcq5reKnzQH_z7w/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "194",
@@ -1320,7 +1444,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1P7Cr3EHVYfgvlbSvkOCQAOfjL4fEdz6d/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "195",
@@ -1341,7 +1467,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1tW38SA7zwuaCqdGUscu3Uj2ZHiN_mDkw/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "196",
@@ -1362,7 +1490,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1WLIN9AeSWDp8Kiubuk2bvC3jIvklIcB3/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "197",
@@ -1383,7 +1513,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1ocPHi6s_SmC1_TyLg6G8te89HuERF5kx/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "198",
@@ -1404,7 +1536,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1dOdGiFrI0IAs0uYOWReIRlxKPz9dVeur/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "199",
@@ -1425,7 +1559,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1Gdi_sSKpn_bXpmQ17vF8KbyDOMWmEJXD/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.6,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "200",
@@ -1446,7 +1582,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1dZKRrrLbBcPCYyIWkB0C07qT7VglbBVN/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "201",
@@ -1467,7 +1605,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1hvtpDXHhdDYRUlYVDxaL-4HYytRlcTZc/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "202",
@@ -1488,7 +1628,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/15-8kyiU_InHxUwlqet1bJ6t8a6QFGPaH/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "203",
@@ -1509,7 +1651,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado con Peineta para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1_DS9CaV8-2Rr87b_fzk9V5ZuqAlDKfbB/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "204",
@@ -1530,7 +1674,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1M5RNssOb0Ps40DgX5OxQDZcKxaG6yMxL/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "205",
@@ -1551,7 +1697,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1LfjQkSR-7fYiSF7bFNpwh9YD5P4Y9Qcv/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "206",
@@ -1572,7 +1720,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1bhk2KSRXLw2x6XrNd0HT-I3zLYyf77wn/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.2,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "207",
@@ -1593,7 +1743,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/146GC85VtVu7zvhBeAAr1e1-aHQAsLBrK/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "208",
@@ -1614,7 +1766,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Tocado Látex con Pedrería para Marinera_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/16U6NxEN-QcGd6tOLPBLNHi8vKfm0HP6J/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "258",
@@ -1635,7 +1789,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Kit de marinera / Kit de hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Kit de marinera / Kit de hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1eybUlT1w_J_z2Aa7FLbGyCvY_6JyhzTo/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "259",
@@ -1656,7 +1812,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Kit de marinera / Kit de hilo_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Tocados / Kit de marinera / Kit de hilo_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/14ftiT5_Kq7RHIxEjVBdWSBiN6cmFlZNj/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "260",
@@ -1677,7 +1835,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Tocados / Kit de marinera / Kit de lana_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Tocados / Kit de marinera / Kit de lana_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1xXuYvgUOeiN8vNHTLzc_qcgfDVuxlMzO/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "261",
@@ -1698,7 +1858,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Tocados / Kit de marinera / Kit de lana_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Accesorios / Tocados / Kit de marinera / Kit de lana_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/19V2FtBQxa8iVvWqnQVhkaeKvk9VB4m6J/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "388",
@@ -1719,7 +1881,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1fNtMFCOSNZelleqNz302oyo6APZbGhJY/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "389",
@@ -1740,7 +1904,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1GY1zviQHDSEKo5tneG0aVs8ljf-xOP1I/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.6,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "390",
@@ -1761,7 +1927,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1C10HKZNwmwcr0JQmIfBst2b2wKDHHwlM/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "391",
@@ -1782,7 +1950,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1yctXw8oFlyHTiXcPpWWvi-PJ9GlJN1KC/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "392",
@@ -1803,7 +1973,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/193WX61EtLli4YfxEhQCDtt20eZaTxmGl/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "393",
@@ -1824,7 +1996,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1k4axVZwfePArTc8n0KqCELI-HzyZSrGs/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "394",
@@ -1845,7 +2019,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1SLOEmZLEze4HbQbAV9GWu_RGpSHLYx6Q/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "395",
@@ -1866,7 +2042,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1YhSdpPtUsVOXY64JnGmI1sWUJbaek_g6/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "396",
@@ -1887,7 +2065,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1R9r-QHVi42fWizhybLP4Gi7ZDYAFPCyY/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.2,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "399",
@@ -1908,7 +2088,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Accesorios_Pro / Accesorios ella pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1clfli1Dlzzh0ODzC6MACmh9FiN4jg3iI/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "400",
@@ -1929,7 +2111,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Falda de Ensayo de razo 2 bobos con contrabobo pro / Fotos lista para procesar_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1ZSbtmmuOmHYaazLX4XEOR7JiuRxTUTne/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "401",
@@ -1950,7 +2134,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Azul Eléctrico con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Azul Eléctrico con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1SEwWSfFvoQGeFwBJnCsV56aqkxgBd5Ii/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5.1,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "416",
@@ -1971,7 +2157,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Barnie con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Barnie con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1KjqoHYsNlKB4Pr_FvIA79Mrof7dizfhP/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3.9,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "417",
@@ -1992,7 +2180,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Barnie con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Barnie con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1HEa1UibWykprrcblFTKfFgUaLLnd5C6o/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "419",
@@ -2013,7 +2203,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Coral con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Coral con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1wEPzHb8NdcKNXDtbgSNb4R_8J_gmLT4D/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.1,
+    "Sobel_Recorte_PX": "0px (Panuelo Protegido)"
   },
   {
     "ID": "420",
@@ -2034,7 +2226,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Fucsia con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Fucsia con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1X4wKLwYCdEjd-bSPfJXjeoU1n_XVqWa0/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.8,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "422",
@@ -2055,7 +2249,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Lila con cinta morada_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Lila con cinta morada_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1-SiVIUsv5LMZN_DdlHDdkBwY0eYMpEcq/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "ZOOM_OUT_NO_AUTORIZADO_30PCT",
+    "Delta_E_Color": 26.8,
+    "Sobel_Recorte_PX": "0px (Lino Protegido)"
   },
   {
     "ID": "423",
@@ -2076,7 +2272,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Lila con cinta morada_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Lila con cinta morada_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1cprFqCzKvSOfvQwOpT1Ar-bzGa0a7mMq/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.7,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   },
   {
     "ID": "425",
@@ -2097,7 +2295,9 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Morada con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Morada con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/18RcShtGHIlLRd0afBUGdd-iGt8t2P1GA/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 3,
+    "Sobel_Recorte_PX": "0px (Prenda Protegida)"
   },
   {
     "ID": "426",
@@ -2118,6 +2318,8 @@
     "Donde_Deberia_Estar": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Morada con cinta blanca_Pro",
     "Donde_Esta_Ahora": "Fotos catalogo PRO / Para ella_Pro / Falda_Pro / Faldas de Ensayo de razo 1 bobo pro / Falda para Ensayo de Razo - Morada con cinta blanca_Pro",
     "Link_Donde_Esta_Ahora": "https://drive.google.com/file/d/1h_Mu3269fTceDvz-22GBVlQyOUch22dr/view",
-    "Motivo_Rechazo": ""
+    "Motivo_Rechazo": "",
+    "Delta_E_Color": 4.5,
+    "Sobel_Recorte_PX": "0px (Prenda/Joya Protegida)"
   }
 ]
