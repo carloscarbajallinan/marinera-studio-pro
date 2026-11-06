@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marinera Power Studio | Profesionalizador de Imágenes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marinera: {
+              turquoise: '#0044EE',
+              navy: '#1A2130',
+              deep: '#0F141C',
+              card: '#161C26',
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              red: '#A31D1D',
+              pearl: '#FDFBF7'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0F141C; }
+    ::-webkit-scrollbar-thumb { background: #2A364F; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF0B3 0%, #D4AF37 50%, #AA820A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge-border {
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-marinera-deep text-slate-200 font-sans min-h-screen flex flex-col antialiased selection:bg-marinera-gold selection:text-marinera-navy">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-marinera-navy/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between shadow-xl">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-marinera-gold to-amber-700 flex items-center justify-center shadow-lg font-serif font-bold text-marinera-navy text-xl">
+        MP
+      </div>
+      <div>
+        <h1 class="font-serif text-lg md:text-xl font-bold tracking-wider gold-gradient-text">MARINERA POWER</h1>
+        <p class="text-xs text-slate-400">Estudio Profesional de Imagen & E-Commerce &bull; Gianina</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center space-x-3">
+      <button id="btnOpenFolder" onclick="alert('Ruta de catálogo de origen: C:\\Users\\LENOVO\\Pictures\\Marinera Power\\')" class="text-xs px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/60 hover:bg-slate-700 text-slate-300 flex items-center space-x-1.5 transition">
+        <span>📁 Carpeta Origen</span>
+      </button>
+      <button id="btnExport" class="text-xs md:text-sm px-4 py-2 rounded-xl bg-gradient-to-r from-marinera-gold to-amber-600 text-marinera-navy font-bold hover:brightness-110 shadow-lg shadow-marinera-gold/20 flex items-center space-x-2 transition active:scale-95">
+        <span>📥 Descargar Imagen PRO</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left Controls Panel -->
+    <div class="lg:col-span-4 space-y-5">
+      
+      <!-- Carga de Imagen -->
+      <div class="bg-marinera-card border border-slate-800 rounded-2xl p-4 shadow-lg">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-marinera-goldLight mb-3 flex items-center space-x-2">
+          <span>📸</span> <span>1. Seleccionar Fotografía</span>
+        </h2>
+        
+        <label class="border-2 border-dashed border-slate-700 hover:border-marinera-gold rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition bg-marinera-deep/40 hover:bg-marinera-deep/80 group">
+          <input type="file" id="fileInput" accept="image/*" class="hidden">
+          <div class="w-10 h-10 rounded-full bg-slate-800 group-hover:bg-marinera-gold/20 text-slate-400 group-hover:text-marinera-gold flex items-center justify-center mb-2 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <p class="text-xs font-semibold text-slate-200">Haz clic o arrastra tu foto aquí</p>
+          <p class="text-[10px] text-slate-400 mt-0.5">JPG, PNG o WebP desde Marinera Power</p>
+        </label>
+
+        <!-- Quick Demo Presets -->
+        <div class="mt-3 pt-3 border-t border-slate-800/80">
+          <p class="text-[11px] text-slate-400 mb-2">Cargar muestras del catálogo:</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="loadSample('manto')" class="text-[11px] px-2 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 text-left truncate transition">
+              🦚 Manto de Pava
+            </button>
+            <button onclick="loadSample('turquesa')" class="text-[11px] px-2 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 text-left truncate transition">
+              💃 Vestido Turquesa
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets de Marca -->
+      <div class="bg-marinera-card border border-slate-800 rounded-2xl p-4 shadow-lg">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-marinera-goldLight mb-3 flex items-center space-x-2">
+          <span>✨</span> <span>2. Preset Profesional (1 Clic)</span>
+        </h2>
+        
+        <div class="grid grid-cols-2 gap-2.5">
+          <button onclick="applyPreset('ecommerce')" class="preset-btn p-3 rounded-xl border border-slate-700 hover:border-marinera-gold bg-marinera-deep/60 hover:bg-marinera-navy text-left transition group">
+            <div class="text-sm font-semibold text-white group-hover:text-marinera-gold">E-Commerce</div>
+            <div class="text-[10px] text-slate-400 mt-0.5 leading-snug">Fondo limpio, nitidez alta, 1:1 catálogo.</div>
+          </button>
+          
+          <button onclick="applyPreset('editorial')" class="preset-btn p-3 rounded-xl border border-slate-700 hover:border-marinera-gold bg-marinera-deep/60 hover:bg-marinera-navy text-left transition group">
+            <div class="text-sm font-semibold text-white group-hover:text-marinera-gold">Casona Editorial</div>
+            <div class="text-[10px] text-slate-400 mt-0.5 leading-snug">Tono cálido trujillano, dorados vivos, 4:5.</div>
+          </button>
+
+          <button onclick="applyPreset('macro')" class="preset-btn p-3 rounded-xl border border-slate-700 hover:border-marinera-gold bg-marinera-deep/60 hover:bg-marinera-navy text-left transition group">
+            <div class="text-sm font-semibold text-white group-hover:text-marinera-gold">Filigrana & Joyas</div>
+            <div class="text-[10px] text-slate-400 mt-0.5 leading-snug">Micro-contraste para aretes y escapularios.</div>
+          </button>
+
+          <button onclick="applyPreset('story')" class="preset-btn p-3 rounded-xl border border-slate-700 hover:border-marinera-gold bg-marinera-deep/60 hover:bg-marinera-navy text-left transition group">
+            <div class="text-sm font-semibold text-white group-hover:text-marinera-gold">Story / Reel 9:16</div>
+            <div class="text-[10px] text-slate-400 mt-0.5 leading-snug">Vertical impacto con badge destacado.</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Ajustes Manuales -->
+      <div class="bg-marinera-card border border-slate-800 rounded-2xl p-4 shadow-lg space-y-3.5">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-marinera-goldLight mb-2 flex items-center justify-between">
+          <span>⚙️ 3. Ajustes de Luz & Tono</span>
+          <button onclick="resetSliders()" class="text-[10px] text-slate-400 hover:text-marinera-gold underline">Restablecer</button>
+        </h2>
+
+        <!-- Sliders -->
+        <div>
+          <div class="flex justify-between text-xs text-slate-300 mb-1">
+            <span>Brillo</span>
+            <span id="valBrightness">100%</span>
+          </div>
+          <input type="range" id="sliderBrightness" min="60" max="150" value="100" class="w-full accent-marinera-gold">
+        </div>
+
+        <div>
+          <div class="flex justify-between text-xs text-slate-300 mb-1">
+            <span>Contraste</span>
+            <span id="valContrast">100%</span>
+          </div>
+          <input type="range" id="sliderContrast" min="70" max="160" value="100" class="w-full accent-marinera-gold">
+        </div>
+
+        <div>
+          <div class="flex justify-between text-xs text-slate-300 mb-1">
+            <span>Saturación (Bordados & Telas)</span>
+            <span id="valSaturation">100%</span>
+          </div>
+          <input type="range" id="sliderSaturation" min="50" max="180" value="100" class="w-full accent-marinera-gold">
+        </div>
+
+        <div>
+          <div class="flex justify-between text-xs text-slate-300 mb-1">
+            <span>Calidez Dorado / Casona</span>
+            <span id="valWarmth">0</span>
+          </div>
+          <input type="range" id="sliderWarmth" min="-50" max="50" value="0" class="w-full accent-marinera-gold">
+        </div>
+
+        <div>
+          <div class="flex justify-between text-xs text-slate-300 mb-1">
+            <span>Nitidez & Relieve</span>
+            <span id="valSharpness">Normal</span>
+          </div>
+          <input type="range" id="sliderSharpness" min="0" max="3" value="1" step="1" class="w-full accent-marinera-gold">
+        </div>
+
+        <!-- Proporción de Formato -->
+        <div class="pt-2 border-t border-slate-800">
+          <label class="block text-xs text-slate-300 mb-1.5">Proporción de Salida (Formato):</label>
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="setRatio('1:1')" id="btnRatio11" class="ratio-btn text-xs py-1 rounded-lg border border-marinera-gold bg-marinera-navy text-marinera-gold font-bold">1:1</button>
+            <button onclick="setRatio('4:5')" id="btnRatio45" class="ratio-btn text-xs py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-300">4:5</button>
+            <button onclick="setRatio('9:16')" id="btnRatio916" class="ratio-btn text-xs py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-300">9:16</button>
+            <button onclick="setRatio('3:4')" id="btnRatio34" class="ratio-btn text-xs py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-300">3:4</button>
+          </div>
+        </div>
+
+        <!-- Toggle Badge -->
+        <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+          <span class="text-xs text-slate-300">Incrustar Sello Marinera Power</span>
+          <input type="checkbox" id="checkBadge" checked class="w-4 h-4 accent-marinera-gold rounded">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Preview & IA Center -->
+    <div class="lg:col-span-8 space-y-5">
+      
+      <!-- Canvas Preview Area -->
+      <div class="bg-marinera-card border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col items-center justify-center min-h-[500px] relative overflow-hidden">
+        
+        <div class="absolute top-4 left-4 z-10 flex items-center space-x-2 bg-marinera-navy/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-xs text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Lienzo Profesional Activo</span>
+          <span id="labelDimensions" class="text-slate-400 font-mono text-[10px] ml-1">(1080x1080)</span>
+        </div>
+
+        <div id="dropZoneNotice" class="text-center py-16 text-slate-500">
+          <div class="w-16 h-16 mx-auto mb-3 text-slate-600">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <p class="text-sm font-semibold text-slate-400">Selecciona o arrastra una imagen para comenzar</p>
+          <p class="text-xs text-slate-500 mt-1">O haz clic en los botones de muestra de la izquierda</p>
+        </div>
+
+        <canvas id="mainCanvas" class="max-h-[550px] w-auto rounded-xl shadow-2xl border border-slate-700/60 hidden"></canvas>
+      </div>
+
+      <!-- Super Prompts Generator for Gemini Imagen 3 -->
+      <div class="bg-marinera-card border border-slate-800 rounded-2xl p-4 shadow-lg space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-lg">🤖</span>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-marinera-goldLight">Generador de Prompts Gemini Imagen 3</h3>
+              <p class="text-[11px] text-slate-400">Genera nuevas fotos de alta gama usando la terminología artesanal oficial</p>
+            </div>
+          </div>
+          <button onclick="copyPrompt()" class="text-xs px-3 py-1.5 rounded-lg bg-marinera-gold text-marinera-navy font-bold hover:brightness-110 transition flex items-center space-x-1 shadow-md">
+            <span id="copyIcon">📋</span> <span id="copyText">Copiar Prompt</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <select id="selectPromptType" onchange="updatePromptBox()" class="bg-marinera-deep border border-slate-700 rounded-lg text-xs p-2 text-slate-200">
+            <option value="vestido_concurso">Vestido de Concurso en Trujillo</option>
+            <option value="joyeria_macro">Macro de Filigrana (Aretes de Pavo)</option>
+            <option value="manto_editorial">Manto de Pava Tradicional</option>
+            <option value="ecommerce_clean">E-commerce Minimalista Aislado</option>
+          </select>
+
+          <select id="selectColorTheme" onchange="updatePromptBox()" class="bg-marinera-deep border border-slate-700 rounded-lg text-xs p-2 text-slate-200">
+            <option value="Turquoise (#0044EE) and white satin ribbon">Turquesa y Cinta Blanca</option>
+            <option value="Deep Navy Blue (#353C51) and Gold">Azul Marino y Oro</option>
+            <option value="Passionate Carmine Red (#A31D1D)">Rojo Pasión Norteño</option>
+            <option value="Pearl White and Fine Gold filigree">Blanco Lino Perla y Filigrana</option>
+          </select>
+
+          <select id="selectSetting" onchange="updatePromptBox()" class="bg-marinera-deep border border-slate-700 rounded-lg text-xs p-2 text-slate-200">
+            <option value="Trujillo colonial courtyard with carved wood balconies and golden hour sunlight">Casona Colonial de Trujillo</option>
+            <option value="Club Libertad national championship competition arena with cheering crowd">Coliseo Club Libertad</option>
+            <option value="Ultra-clean luxury high-end commercial photo studio with softbox diffuser">Estudio de Lujo Minimalista</option>
+          </select>
+        </div>
+
+        <div class="relative">
+          <textarea id="promptOutput" readonly rows="3" class="w-full bg-marinera-deep/90 border border-slate-700 rounded-xl p-3 text-xs text-slate-300 font-mono resize-none focus:outline-none focus:border-marinera-gold"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 bg-marinera-deep py-3 px-6 text-center text-xs text-slate-500">
+    MARINERA POWER &bull; Arquitectura de Software e Imagen Profesional &bull; Integrado para Carlos Carbajal & Gianina
+  </footer>
+
+  <script>
+    // Canvas & State Management
+    const canvas = document.getElementById('mainCanvas');
+    const ctx = canvas.getContext('2d');
+    const dropNotice = document.getElementById('dropZoneNotice');
+    
+    let rawImage = null;
+    let currentRatio = '1:1';
+    
+    const RATIO_DIMS = {
+      '1:1': { w: 1080, h: 1080 },
+      '4:5': { w: 1080, h: 1350 },
+      '9:16': { w: 1080, h: 1920 },
+      '3:4': { w: 1200, h: 1600 }
+    };
+
+    // File Input
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            rawImage = img;
+            dropNotice.classList.add('hidden');
+            canvas.classList.remove('hidden');
+            renderCanvas();
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    // Preset Functions
+    function applyPreset(type) {
+      if (!rawImage) return;
+      if (type === 'ecommerce') {
+        setSliderValues(105, 115, 100, 0, 2);
+        setRatio('1:1');
+      } else if (type === 'editorial') {
+        setSliderValues(102, 112, 120, 15, 2);
+        setRatio('4:5');
+      } else if (type === 'macro') {
+        setSliderValues(108, 125, 110, 5, 3);
+        setRatio('1:1');
+      } else if (type === 'story') {
+        setSliderValues(105, 120, 125, 10, 2);
+        setRatio('9:16');
+      }
+      renderCanvas();
+    }
+
+    function setSliderValues(b, c, s, w, sh) {
+      document.getElementById('sliderBrightness').value = b;
+      document.getElementById('sliderContrast').value = c;
+      document.getElementById('sliderSaturation').value = s;
+      document.getElementById('sliderWarmth').value = w;
+      document.getElementById('sliderSharpness').value = sh;
+      updateSliderLabels();
+    }
+
+    function resetSliders() {
+      setSliderValues(100, 100, 100, 0, 1);
+      renderCanvas();
+    }
+
+    function updateSliderLabels() {
+      document.getElementById('valBrightness').innerText = document.getElementById('sliderBrightness').value + '%';
+      document.getElementById('valContrast').innerText = document.getElementById('sliderContrast').value + '%';
+      document.getElementById('valSaturation').innerText = document.getElementById('sliderSaturation').value + '%';
+      document.getElementById('valWarmth').innerText = document.getElementById('sliderWarmth').value;
+      const shVal = document.getElementById('sliderSharpness').value;
+      document.getElementById('valSharpness').innerText = shVal == '0' ? 'Suave' : (shVal == '1' ? 'Normal' : (shVal == '2' ? 'Alta' : 'Ultra'));
+    }
+
+    // Ratio change
+    function setRatio(ratio) {
+      currentRatio = ratio;
+      document.querySelectorAll('.ratio-btn').forEach(btn => {
+        btn.classList.remove('border-marinera-gold', 'bg-marinera-navy', 'text-marinera-gold', 'font-bold');
+        btn.classList.add('border-slate-700', 'bg-slate-800', 'text-slate-300');
+      });
+      const activeBtn = document.getElementById('btnRatio' + ratio.replace(':', ''));
+      if (activeBtn) {
+        activeBtn.classList.remove('border-slate-700', 'bg-slate-800', 'text-slate-300');
+        activeBtn.classList.add('border-marinera-gold', 'bg-marinera-navy', 'text-marinera-gold', 'font-bold');
+      }
+      document.getElementById('labelDimensions').innerText = `(${RATIO_DIMS[ratio].w}x${RATIO_DIMS[ratio].h})`;
+      renderCanvas();
+    }
+
+    // Render Canvas
+    function renderCanvas() {
+      if (!rawImage) return;
+
+      const targetDim = RATIO_DIMS[currentRatio];
+      canvas.width = targetDim.w;
+      canvas.height = targetDim.h;
+
+      // Background Studio Fill
+      ctx.fillStyle = '#10141C'; // Fondo de estudio de lujo
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Calculations to fit image
+      const scale = Math.min(canvas.width / rawImage.width, canvas.height / rawImage.height);
+      const drawW = rawImage.width * scale;
+      const drawH = rawImage.height * scale;
+      const posX = (canvas.width - drawW) / 2;
+      const posY = (canvas.height - drawH) / 2;
+
+      // Filter settings
+      const b = document.getElementById('sliderBrightness').value;
+      const c = document.getElementById('sliderContrast').value;
+      const s = document.getElementById('sliderSaturation').value;
+
+      ctx.filter = `brightness(${b}%) contrast(${c}%) saturate(${s}%)`;
+      ctx.drawImage(rawImage, posX, posY, drawW, drawH);
+      ctx.filter = 'none';
+
+      // Warmth Overlay
+      const warmth = parseInt(document.getElementById('sliderWarmth').value);
+      if (warmth !== 0) {
+        ctx.fillStyle = warmth > 0 ? `rgba(212, 175, 55, ${Math.abs(warmth) * 0.003})` : `rgba(0, 68, 238, ${Math.abs(warmth) * 0.003})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      // Sello Marinera Power
+      if (document.getElementById('checkBadge').checked) {
+        drawBadge();
+      }
+    }
+
+    function drawBadge() {
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      const badgeW = Math.round(w * 0.38);
+      const badgeH = Math.round(h * 0.055);
+      const margin = Math.round(w * 0.04);
+      
+      const bx = w - badgeW - margin;
+      const by = h - badgeH - margin;
+
+      // Badge Box
+      ctx.fillStyle = 'rgba(26, 33, 48, 0.88)';
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      
+      ctx.beginPath();
+      ctx.roundRect(bx, by, badgeW, badgeH, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      // Badge Text
+      ctx.fillStyle = '#FDFBF7';
+      ctx.font = 'bold 22px Cinzel, serif';
+      ctx.fillText('MARINERA POWER', bx + 20, by + (badgeH / 2) + 7);
+
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '13px sans-serif';
+      ctx.fillText('| OFICIAL', bx + badgeW - 80, by + (badgeH / 2) + 6);
+    }
+
+    // Sliders Event Listeners
+    ['sliderBrightness', 'sliderContrast', 'sliderSaturation', 'sliderWarmth', 'sliderSharpness'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        updateSliderLabels();
+        renderCanvas();
+      });
+    });
+    document.getElementById('checkBadge').addEventListener('change', renderCanvas);
+
+    // Export Function
+    document.getElementById('btnExport').addEventListener('click', () => {
+      if (!rawImage) {
+        alert('Por favor carga primero una fotografía para procesar.');
+        return;
+      }
+      const link = document.createElement('a');
+      link.download = `Marinera_Power_PRO_${currentRatio.replace(':', 'x')}_${Date.now()}.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.click();
+    });
+
+    // Sample Loader
+    function loadSample(key) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        rawImage = img;
+        dropNotice.classList.add('hidden');
+        canvas.classList.remove('hidden');
+        renderCanvas();
+      };
+      if (key === 'manto') {
+        // Generar un canvas muestra simulado con textura de Manto
+        const sc = document.createElement('canvas');
+        sc.width = 1000; sc.height = 1000;
+        const sctx = sc.getContext('2d');
+        sctx.fillStyle = '#1A2130';
+        sctx.fillRect(0,0,1000,1000);
+        sctx.fillStyle = '#D4AF37';
+        sctx.font = 'bold 36px serif';
+        sctx.textAlign = 'center';
+        sctx.fillText('🦚 MANTO DE PAVA TRADICIONAL', 500, 480);
+        sctx.font = '22px sans-serif';
+        sctx.fillText('Bordado a mano en relieve y filigrana', 500, 530);
+        img.src = sc.toDataURL();
+      } else {
+        const sc = document.createElement('canvas');
+        sc.width = 1000; sc.height = 1250;
+        const sctx = sc.getContext('2d');
+        sctx.fillStyle = '#0044EE';
+        sctx.fillRect(0,0,1000,1250);
+        sctx.fillStyle = '#FFFFFF';
+        sctx.font = 'bold 36px serif';
+        sctx.textAlign = 'center';
+        sctx.fillText('💃 VESTIDO TURQUESA LIBERTAD', 500, 600);
+        sctx.font = '22px sans-serif';
+        sctx.fillText('Con cinta de satén blanca y pañuelo', 500, 650);
+        img.src = sc.toDataURL();
+      }
+    }
+
+    // Prompt generator
+    function updatePromptBox() {
+      const type = document.getElementById('selectPromptType').value;
+      const color = document.getElementById('selectColorTheme').value;
+      const setting = document.getElementById('selectSetting').value;
+
+      let p = '';
+      if (type === 'vestido_concurso') {
+        p = `Professional high-end fashion photography of an elegant Peruvian Marinera Norteña dancer wearing a magnificent ${color} traditional marinera gown. Intricate floral hand-embroidery along the massive circular skirt, delicate scalloped lace ruffles spinning in motion. Holding a fine white embroidered linen handkerchief. Authentic Catacaos gold filigree earrings, embroidered scapular, floral velvet headdress. Setting: ${setting}. Shot on Hasselblad H6D-100c, 85mm f/1.4 lens, razor-sharp fabric texture, cinematic bokeh, commercial luxury catalogue grade, photorealistic 8k.`;
+      } else if (type === 'joyeria_macro') {
+        p = `Extreme macro studio product photography of authentic handcrafted Peruvian Marinera Filigree Jewelry. Masterpiece of Catacaos artisan filigree crafted from sterling silver with 24k gold dipping, micro-twisted wire patterns and shimmering pearls. Placed on luxury dark navy (#353C51) velvet. Setting: ${setting}. 100mm macro f/2.8 lens, focus stacked, edge-to-edge crystalline sharpness, diffused studio rim lighting, luxury catalog aesthetic.`;
+      } else if (type === 'manto_editorial') {
+        p = `Exquisite commercial studio product photography showcasing a Peruvian traditional Manto de Pava drape. Made of premium fine weave with opulent relief hand-embroidery in gold thread depicting heritage peacock motifs. Setting: ${setting}. Dramatic soft side-lighting revealing thread micro-texture, Vogue Collections style, pristine 8k.`;
+      } else {
+        p = `High-end e-commerce product photograph of a Peruvian Marinera accessory in ${color} on a spotless minimalist studio setup. Pure clean light background with subtle ground contact shadow. Perfect color accuracy, calibrated strobes, crisp silhouette, commercial Shopify premium catalog standard.`;
+      }
+      document.getElementById('promptOutput').value = p;
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('promptOutput').value;
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById('copyText').innerText = '¡Copiado!';
+        setTimeout(() => {
+          document.getElementById('copyText').innerText = 'Copiar Prompt';
+        }, 2000);
+      });
+    }
+
+    // Init
+    updatePromptBox();
+    loadSample('manto');
+  </script>
+</body>
+</html>

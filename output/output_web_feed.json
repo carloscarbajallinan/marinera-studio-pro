@@ -1,0 +1,83 @@
+{
+  "version": "V12_INDUSTRIAL_TRACEABILITY",
+  "last_update": "2026-11-05 23:50:00",
+  "spreadsheet_id": "1kRsCZ7ZpPxyxrSEkUrYRl3NHahrQQche90RKK2yedQ8",
+  "tab_name": "Control_Total_Drive_V2",
+  "canary_telemetry": [
+    {
+      "row_sheet": 424,
+      "id": "CANARY_1",
+      "name": "foto (3).png",
+      "estado": "APROBADO_OFICIAL",
+      "score_final": 98,
+      "delta_e_color": 3.2,
+      "sobel_recorte_px": "193px",
+      "sobel_gradiente": 0.4,
+      "blanco_perimetro_max": 229.0,
+      "latencia_seg": 4.6,
+      "ruta_destino_pro": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Lila con cinta morada_Pro/foto (3)_pro.jpg",
+      "ubicacion_actual_fisica": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Lila con cinta morada_Pro/foto (3)_pro.jpg",
+      "motivo_rechazo": null
+    },
+    {
+      "row_sheet": 422,
+      "id": "CANARY_2",
+      "name": "34a63e97 PRO.jpg",
+      "estado": "RECHAZADO_QA",
+      "score_final": 25,
+      "delta_e_color": 26.8,
+      "sobel_recorte_px": "0px (Lino Protegido)",
+      "sobel_gradiente": 7.2,
+      "blanco_perimetro_max": 234.0,
+      "latencia_seg": 4.2,
+      "ruta_destino_pro": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Lila con cinta morada_Pro/34a63e97-ca37-416f-a826-5072902c2f56_pro.jpg",
+      "ubicacion_actual_fisica": "_Fotos_Erroneas_y_Desalineadas/Falda para Ensayo de Razo - Lila con cinta morada_Error/34a63e97_RECHAZADA_ZOOM_OUT.jpg",
+      "motivo_rechazo": "ZOOM_OUT_NO_AUTORIZADO_30PCT"
+    },
+    {
+      "row_sheet": 419,
+      "id": "CANARY_3",
+      "name": "d72049af PRO.jpg",
+      "estado": "APROBADO_OFICIAL",
+      "score_final": 96,
+      "delta_e_color": 4.1,
+      "sobel_recorte_px": "0px (Panuelo Protegido)",
+      "sobel_gradiente": 6.8,
+      "blanco_perimetro_max": 229.4,
+      "latencia_seg": 4.9,
+      "ruta_destino_pro": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Coral con cinta blanca_Pro/d72049af-014c-4a6e-ba54-fe1f0aaa1d4f_pro.jpg",
+      "ubicacion_actual_fisica": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Coral con cinta blanca_Pro/d72049af-014c-4a6e-ba54-fe1f0aaa1d4f_pro.jpg",
+      "motivo_rechazo": null
+    },
+    {
+      "row_sheet": 29,
+      "id": "CANARY_4",
+      "name": "1.jpg (Aretes)",
+      "estado": "APROBADO_OFICIAL",
+      "score_final": 95,
+      "delta_e_color": 2.8,
+      "sobel_recorte_px": "0px (Joyeria Protegida)",
+      "sobel_gradiente": 8.4,
+      "blanco_perimetro_max": 228.8,
+      "latencia_seg": 4.1,
+      "ruta_destino_pro": "Fotos catalogo PRO/Para ella_Pro/Accesorios_Pro/Aretes para Marinera_Pro/1_pro.jpg",
+      "ubicacion_actual_fisica": "Fotos catalogo PRO/Para ella_Pro/Accesorios_Pro/Aretes para Marinera_Pro/1_pro.jpg",
+      "motivo_rechazo": null
+    },
+    {
+      "row_sheet": 425,
+      "id": "CANARY_5",
+      "name": "1841c6d0 PRO.jpg",
+      "estado": "APROBADO_OFICIAL",
+      "score_final": 97,
+      "delta_e_color": 3.0,
+      "sobel_recorte_px": "0px (Prenda Protegida)",
+      "sobel_gradiente": 5.9,
+      "blanco_perimetro_max": 229.1,
+      "latencia_seg": 4.4,
+      "ruta_destino_pro": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Morada con cinta blanca_Pro/1841c6d0-b0f4-4115-b5c9-f989cfd4fdfa_pro.jpg",
+      "ubicacion_actual_fisica": "Fotos catalogo PRO/Para ella_Pro/Falda_Pro/Faldas de Ensayo de razo 1 bobo pro/Falda para Ensayo de Razo - Morada con cinta blanca_Pro/1841c6d0-b0f4-4115-b5c9-f989cfd4fdfa_pro.jpg",
+      "motivo_rechazo": null
+    }
+  ]
+}

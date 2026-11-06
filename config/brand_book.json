@@ -1,0 +1,85 @@
+{
+  "brand_name": "Marinera Power",
+  "founder": "Gianina",
+  "mission": "Realzar y profesionalizar la indumentaria, accesorios y joyas tradicionales de la Marinera Norteña peruana con estándares de alta costura, e-commerce internacional y estética editorial.",
+  "color_palette": {
+    "primary_turquoise": {
+      "name": "Turquesa Libertad",
+      "hex": "#0044EE",
+      "rgb": [0, 68, 238],
+      "usage": "Vestidos de concurso y acentos principales"
+    },
+    "deep_navy": {
+      "name": "Azul Marino Señorial",
+      "hex": "#353C51",
+      "rgb": [53, 60, 81],
+      "usage": "Fondos elegantes, bordados de contraste y tipografía formal"
+    },
+    "gold_filigree": {
+      "name": "Oro Filigrana de Catacaos",
+      "hex": "#D4AF37",
+      "rgb": [212, 175, 55],
+      "usage": "Joyas, broches, sellos de marca y ribetes"
+    },
+    "carmine_red": {
+      "name": "Rojo Pasión Norteña",
+      "hex": "#A31D1D",
+      "rgb": [163, 29, 29],
+      "usage": "Tocados florales, pañuelos de fiesta y detalles vivos"
+    },
+    "pearl_white": {
+      "name": "Blanco Lino Perla",
+      "hex": "#FDFBF7",
+      "rgb": [253, 251, 247],
+      "usage": "Pañuelos calados, mantos de leche y fondos neutros de catálogo"
+    }
+  },
+  "aspect_ratios": {
+    "instagram_feed": {
+      "ratio": "1:1",
+      "width": 1080,
+      "height": 1080,
+      "purpose": "Feed general y catálogo cuadrado"
+    },
+    "instagram_portrait": {
+      "ratio": "4:5",
+      "width": 1080,
+      "height": 1350,
+      "purpose": "Publicaciones destacadas de vestidos completos"
+    },
+    "story_reel": {
+      "ratio": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "purpose": "Stories de Instagram, Reels y TikTok"
+    },
+    "ecommerce_catalog": {
+      "ratio": "3:4",
+      "width": 1200,
+      "height": 1600,
+      "purpose": "Fichas de producto web y lookbook"
+    }
+  },
+  "product_lines": [
+    {
+      "id": "vestidos",
+      "name": "Vestidos & Trajes de Concurso",
+      "items": ["Faldas de tres tiempos con vuelillos", "Camisones con bordado punto de cruz", "Cintas de satén"]
+    },
+    {
+      "id": "mantos",
+      "name": "Mantos Tradicionales",
+      "items": ["Manto de Pava bordado a mano", "Manto de Leche calado tradicional", "Chales finos"]
+    },
+    {
+      "id": "joyeria",
+      "name": "Joyería & Filigrana",
+      "items": ["Aretes de pavo en filigrana", "Dormilonas tradicionales", "Escapularios para mujer bordados", "Pardos y gargantillas"]
+    },
+    {
+      "id": "accesorios",
+      "name": "Tocados & Complementos",
+      "items": ["Tocados de látex con pedrería", "Rosas de terciopelo para peinado", "Fajas y cinturones de hilo", "Pañuelos de lino calados"]
+    }
+  ]
+}
