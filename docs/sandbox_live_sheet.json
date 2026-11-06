@@ -1,5 +1,6 @@
 [
   {
+    "Sheet_Row": 2,
     "Timestamp": "2026-11-06 2:13:03",
     "Test_Batch_ID": "CANARY_V5_BATCH1",
     "ID_Catalogo": "28",
@@ -20,6 +21,7 @@
     "Observaciones_Tecnicas": "Alucinación de modelo: Gemini inventó bailarina portando aretes por directiva antropomórfica en prompt anterior. Requiere re-procesar con PROMPT_JOYERIA_ACCESORIOS."
   },
   {
+    "Sheet_Row": 3,
     "Timestamp": "2026-11-06 2:13:15",
     "Test_Batch_ID": "CANARY_V5_BATCH1",
     "ID_Catalogo": "418",
@@ -40,6 +42,7 @@
     "Observaciones_Tecnicas": "Falda coral y cintas blancas preservadas 1:1. Tono cálido homogéneo en ciclorama."
   },
   {
+    "Sheet_Row": 4,
     "Timestamp": "2026-11-06 2:13:28",
     "Test_Batch_ID": "CANARY_V5_BATCH1",
     "ID_Catalogo": "421",
@@ -60,6 +63,7 @@
     "Observaciones_Tecnicas": "Excelente recorte de vuelo y pañuelo. Suelo limpio 100%."
   },
   {
+    "Sheet_Row": 5,
     "Timestamp": "2026-11-06 2:13:40",
     "Test_Batch_ID": "CANARY_V5_BATCH1",
     "ID_Catalogo": "423",
@@ -80,6 +84,7 @@
     "Observaciones_Tecnicas": "Recorte Sobel eliminó barras blancas previas. Suelo limpio sin manchas negras en pies."
   },
   {
+    "Sheet_Row": 6,
     "Timestamp": "2026-11-06 2:13:52",
     "Test_Batch_ID": "CANARY_V5_BATCH1",
     "ID_Catalogo": "424",
@@ -100,6 +105,7 @@
     "Observaciones_Tecnicas": "Falda morada de razo y cintas blancas preservadas impecablemente."
   },
   {
+    "Sheet_Row": 7,
     "Timestamp": "2026-11-06 8:22:19",
     "Test_Batch_ID": "EXP_20261106_082209",
     "ID_Catalogo": "28",
@@ -120,6 +126,7 @@
     "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=93.35) | Alerta: posible sombra densa (66.1%)"
   },
   {
+    "Sheet_Row": 8,
     "Timestamp": "2026-11-06 8:22:30",
     "Test_Batch_ID": "EXP_20261106_082209",
     "ID_Catalogo": "418",
@@ -140,6 +147,7 @@
     "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=65.65) | Piso limpio (99.7%)"
   },
   {
+    "Sheet_Row": 9,
     "Timestamp": "2026-11-06 8:22:41",
     "Test_Batch_ID": "EXP_20261106_082209",
     "ID_Catalogo": "421",
@@ -160,6 +168,7 @@
     "Observaciones_Tecnicas": "Error API Gemini: 'content'"
   },
   {
+    "Sheet_Row": 10,
     "Timestamp": "2026-11-06 8:22:52",
     "Test_Batch_ID": "EXP_20261106_082209",
     "ID_Catalogo": "423",
@@ -180,6 +189,7 @@
     "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=69.19) | Piso limpio (100.0%)"
   },
   {
+    "Sheet_Row": 11,
     "Timestamp": "2026-11-06 8:23:03",
     "Test_Batch_ID": "EXP_20261106_082209",
     "ID_Catalogo": "424",
@@ -198,5 +208,110 @@
     "ID_Drive_Mesa": "1ql7DwrxPiSleM8LnacDKdcIVRZekba3B",
     "Link_Drive_Mesa": "https://drive.google.com/file/d/1ql7DwrxPiSleM8LnacDKdcIVRZekba3B/view",
     "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=50.09) | Piso limpio (100.0%)"
+  },
+  {
+    "Sheet_Row": 12,
+    "Timestamp": "2026-11-06 13:58:23",
+    "Test_Batch_ID": "EXP_20261106_135805",
+    "ID_Catalogo": "28",
+    "Intento_Num": "TEST_CANARY",
+    "Categoria_Ruta": "Fotos catalogo / Para ella / Accesorios / Aretes para Marinera",
+    "Nombre_Archivo_Original": "1",
+    "Modo_Prompt": "JOYERIA_ACCESORIO",
+    "Resultado_Visual": "REVISION_MANUAL",
+    "Score_QA_Final": "67",
+    "Delta_E_Color": "99.33",
+    "Score_Suelo_Pies": "77.7%",
+    "Latencia_Seg": "12.69",
+    "Vista_Original": "",
+    "Vista_PRO_Test": "",
+    "ID_Drive_RAW": "1rUTxON3dhX-aEK5VhqFYNoFGB1paqYpG",
+    "ID_Drive_Mesa": "1oWMrg1Dtxh0ONVPx5HZEX-sjnZre_LmO",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1oWMrg1Dtxh0ONVPx5HZEX-sjnZre_LmO/view?usp=drivesdk",
+    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=99.33) | Alerta: posible sombra densa (77.7%)"
+  },
+  {
+    "Sheet_Row": 13,
+    "Timestamp": "2026-11-06 13:58:39",
+    "Test_Batch_ID": "EXP_20261106_135805",
+    "ID_Catalogo": "418",
+    "Intento_Num": "TEST_CANARY",
+    "Categoria_Ruta": "Fotos catalogo / Para ella / Falda / Falda de Ensayo / Faldas de Ensayo de razo 1 bobo / Falda para Ensayo de Razo - Coral con cinta blanca",
+    "Nombre_Archivo_Original": "d72049af-014c-4a6e-ba54-fe1f0aaa1d4f.JPG",
+    "Modo_Prompt": "MODA_MODELO",
+    "Resultado_Visual": "REVISION_MANUAL",
+    "Score_QA_Final": "58",
+    "Delta_E_Color": "101.16",
+    "Score_Suelo_Pies": "89.6%",
+    "Latencia_Seg": "9.1",
+    "Vista_Original": "",
+    "Vista_PRO_Test": "",
+    "ID_Drive_RAW": "1raZ3eZwV02mzN7oovNdWNz4hQoLfoDXx",
+    "ID_Drive_Mesa": "1yFO6nKvzDTA6b5dQ04SCpRJKuK_TSbE6",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1yFO6nKvzDTA6b5dQ04SCpRJKuK_TSbE6/view?usp=drivesdk",
+    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=101.16) | Alerta: posible sombra densa (89.6%)"
+  },
+  {
+    "Sheet_Row": 14,
+    "Timestamp": "2026-11-06 13:58:59",
+    "Test_Batch_ID": "EXP_20261106_135805",
+    "ID_Catalogo": "421",
+    "Intento_Num": "TEST_CANARY",
+    "Categoria_Ruta": "Fotos catalogo / Para ella / Falda / Falda de Ensayo / Faldas de Ensayo de razo 1 bobo / Falda para Ensayo de Razo - Lila con cinta morada",
+    "Nombre_Archivo_Original": "34a63e97-ca37-416f-a826-5072902c2f56.JPG",
+    "Modo_Prompt": "MODA_MODELO",
+    "Resultado_Visual": "REVISION_MANUAL",
+    "Score_QA_Final": "61",
+    "Delta_E_Color": "97.15",
+    "Score_Suelo_Pies": "100.0%",
+    "Latencia_Seg": "8.83",
+    "Vista_Original": "",
+    "Vista_PRO_Test": "",
+    "ID_Drive_RAW": "1NiMDAgHQJ4jA1KrkoxRn5Y7e3u_3mnZx",
+    "ID_Drive_Mesa": "1IDy3KJbyl3v0p4hcEyWQ5CBi1P5W_VRL",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1IDy3KJbyl3v0p4hcEyWQ5CBi1P5W_VRL/view?usp=drivesdk",
+    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=97.15) | Piso limpio (100.0%)"
+  },
+  {
+    "Sheet_Row": 15,
+    "Timestamp": "2026-11-06 13:59:15",
+    "Test_Batch_ID": "EXP_20261106_135805",
+    "ID_Catalogo": "423",
+    "Intento_Num": "TEST_CANARY",
+    "Categoria_Ruta": "Fotos catalogo / Para ella / Falda / Falda de Ensayo / Faldas de Ensayo de razo 1 bobo / Falda para Ensayo de Razo - Lila con cinta morada",
+    "Nombre_Archivo_Original": "foto (3).png",
+    "Modo_Prompt": "MODA_MODELO",
+    "Resultado_Visual": "REVISION_MANUAL",
+    "Score_QA_Final": "73",
+    "Delta_E_Color": "56.23",
+    "Score_Suelo_Pies": "98.1%",
+    "Latencia_Seg": "8.68",
+    "Vista_Original": "",
+    "Vista_PRO_Test": "",
+    "ID_Drive_RAW": "1u79Gy2eK3l8vFaXZXpjfXJhnDiEneoer",
+    "ID_Drive_Mesa": "1IFlb8ehBz-SlKXzeQ-a8z3L7bCLRQVuA",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1IFlb8ehBz-SlKXzeQ-a8z3L7bCLRQVuA/view?usp=drivesdk",
+    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=56.23) | Piso limpio (98.1%)"
+  },
+  {
+    "Sheet_Row": 16,
+    "Timestamp": "2026-11-06 13:59:31",
+    "Test_Batch_ID": "EXP_20261106_135805",
+    "ID_Catalogo": "424",
+    "Intento_Num": "TEST_CANARY",
+    "Categoria_Ruta": "Fotos catalogo / Para ella / Falda / Falda de Ensayo / Faldas de Ensayo de razo 1 bobo / Falda para Ensayo de Razo - Morada con cinta blanca",
+    "Nombre_Archivo_Original": "1841c6d0-b0f4-4115-b5c9-f989cfd4fdfa.JPG",
+    "Modo_Prompt": "MODA_MODELO",
+    "Resultado_Visual": "REVISION_MANUAL",
+    "Score_QA_Final": "67",
+    "Delta_E_Color": "84.15",
+    "Score_Suelo_Pies": "95.4%",
+    "Latencia_Seg": "8.87",
+    "Vista_Original": "",
+    "Vista_PRO_Test": "",
+    "ID_Drive_RAW": "1swEs0yda-FjgFhiYwKAf-LQ7AgIVXhDh",
+    "ID_Drive_Mesa": "1ql7DwrxPiSleM8LnacDKdcIVRZekba3B",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1ql7DwrxPiSleM8LnacDKdcIVRZekba3B/view?usp=drivesdk",
+    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=84.15) | Piso limpio (95.4%)"
   }
 ]
