@@ -479,13 +479,13 @@
 
     function getOriginalUrl(item) {
       if (item.local_orig_rel) return item.local_orig_rel;
-      if (item.orig_id) return 'https://lh3.googleusercontent.com/d/' + item.orig_id;
+      if (item.orig_id) return 'https://lh3.googleusercontent.com/d/' + item.orig_id + '=s400';
       return 'https://placehold.co/600x600/101622/D4AF37?text=Original';
     }
 
     function getProUrl(item) {
       if (item.local_pro_rel) return item.local_pro_rel;
-      if (item.pro_id && item.pro_id !== '-') return 'https://lh3.googleusercontent.com/d/' + item.pro_id;
+      if (item.pro_id && item.pro_id !== '-') return 'https://lh3.googleusercontent.com/d/' + item.pro_id + '=s400';
       return 'https://placehold.co/600x600/101622/A31D1D?text=PRO';
     }
 
@@ -967,10 +967,10 @@
       const viewer = document.getElementById('scModalViewer');
       // High-performance image serving via =s800
       const origUrl = currentScItem.ID_Archivo_Original 
-        ? 'https://lh3.googleusercontent.com/d/' + currentScItem.ID_Archivo_Original + '=s800'
+        ? 'https://lh3.googleusercontent.com/d/' + currentScItem.ID_Archivo_Original + '=s400'
         : 'https://placehold.co/600x600/101622/D4AF37?text=Original';
       const proUrl = currentScItem.ID_Foto_PRO 
-        ? 'https://lh3.googleusercontent.com/d/' + currentScItem.ID_Foto_PRO + '=s800'
+        ? 'https://lh3.googleusercontent.com/d/' + currentScItem.ID_Foto_PRO + '=s400'
         : 'https://placehold.co/600x600/101622/A31D1D?text=PRO';
 
       if (scCompareMode === 'slider') {
