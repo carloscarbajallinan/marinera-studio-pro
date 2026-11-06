@@ -225,10 +225,10 @@
     "Latencia_Seg": "12.69",
     "Vista_Original": "",
     "Vista_PRO_Test": "",
-    "ID_Drive_RAW": "1rUTxON3dhX-aEK5VhqFYNoFGB1paqYpG",
-    "ID_Drive_Mesa": "1oWMrg1Dtxh0ONVPx5HZEX-sjnZre_LmO",
-    "Link_Drive_Mesa": "https://drive.google.com/file/d/1oWMrg1Dtxh0ONVPx5HZEX-sjnZre_LmO/view?usp=drivesdk",
-    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=99.33) | Alerta: posible sombra densa (77.7%)"
+    "ID_Drive_RAW": "12DXppF0ZoBdee3tb7hGHjMAOm8451SB_",
+    "ID_Drive_Mesa": "1HDQicPqpanMY--ceVEK5gcL9XpXsGV0z",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1HDQicPqpanMY--ceVEK5gcL9XpXsGV0z/view",
+    "Observaciones_Tecnicas": "Joyeria 1:1 sin modelo alucinada • 0px (Joyeria protegida) • Escala Gemini 0.998x -> Python 1.000x • Base limpia (84.8 pct)"
   },
   {
     "Sheet_Row": 13,
@@ -246,10 +246,10 @@
     "Latencia_Seg": "9.1",
     "Vista_Original": "",
     "Vista_PRO_Test": "",
-    "ID_Drive_RAW": "1raZ3eZwV02mzN7oovNdWNz4hQoLfoDXx",
-    "ID_Drive_Mesa": "1yFO6nKvzDTA6b5dQ04SCpRJKuK_TSbE6",
-    "Link_Drive_Mesa": "https://drive.google.com/file/d/1yFO6nKvzDTA6b5dQ04SCpRJKuK_TSbE6/view?usp=drivesdk",
-    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=101.16) | Alerta: posible sombra densa (89.6%)"
+    "ID_Drive_RAW": "1NVyXQIyptwMVECbiYsRO2u3QtLGcQLPu",
+    "ID_Drive_Mesa": "1M1T8eSR20_Y7fBAx23Fhl23WZrEc8J_u",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1M1T8eSR20_Y7fBAx23Fhl23WZrEc8J_u/view",
+    "Observaciones_Tecnicas": "Falda coral y pose 1:1 • 0px (Sin barras blancas) • Escala Gemini 1.001x -> Python 1.000x • Base limpia (100 pct)"
   },
   {
     "Sheet_Row": 14,
@@ -267,10 +267,10 @@
     "Latencia_Seg": "8.83",
     "Vista_Original": "",
     "Vista_PRO_Test": "",
-    "ID_Drive_RAW": "1NiMDAgHQJ4jA1KrkoxRn5Y7e3u_3mnZx",
-    "ID_Drive_Mesa": "1IDy3KJbyl3v0p4hcEyWQ5CBi1P5W_VRL",
-    "Link_Drive_Mesa": "https://drive.google.com/file/d/1IDy3KJbyl3v0p4hcEyWQ5CBi1P5W_VRL/view?usp=drivesdk",
-    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=97.15) | Piso limpio (100.0%)"
+    "ID_Drive_RAW": "14HeIHyi4R0lSSI1rqHcSu5pxF8yG1K2N",
+    "ID_Drive_Mesa": "1h7walqv5SFSydrWO-DDlo1SE92JvvThf",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1h7walqv5SFSydrWO-DDlo1SE92JvvThf/view",
+    "Observaciones_Tecnicas": "Gemini alejo sujeto (0.687x) e invento pies/panuelo • Python SIFT re-encuadro a escala 1.000x (1:1) • Base limpia (100 pct)"
   },
   {
     "Sheet_Row": 15,
@@ -288,10 +288,10 @@
     "Latencia_Seg": "8.68",
     "Vista_Original": "",
     "Vista_PRO_Test": "",
-    "ID_Drive_RAW": "1u79Gy2eK3l8vFaXZXpjfXJhnDiEneoer",
-    "ID_Drive_Mesa": "1IFlb8ehBz-SlKXzeQ-a8z3L7bCLRQVuA",
-    "Link_Drive_Mesa": "https://drive.google.com/file/d/1IFlb8ehBz-SlKXzeQ-a8z3L7bCLRQVuA/view?usp=drivesdk",
-    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=56.23) | Piso limpio (98.1%)"
+    "ID_Drive_RAW": "1gLWNlGmaAquZcnCHYwA78Ibgi0SViwN4",
+    "ID_Drive_Mesa": "1oszRFVRr9UVgZ4FTTiG9oHvwNTj-flUv",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1oszRFVRr9UVgZ4FTTiG9oHvwNTj-flUv/view",
+    "Observaciones_Tecnicas": "Recorte Sobel Python elimino 307px barras blancas (L:192 R:115) • Escala Gemini 1.006x -> Python 1.000x • Base limpia (100 pct)"
   },
   {
     "Sheet_Row": 16,
@@ -309,9 +309,9 @@
     "Latencia_Seg": "8.87",
     "Vista_Original": "",
     "Vista_PRO_Test": "",
-    "ID_Drive_RAW": "1swEs0yda-FjgFhiYwKAf-LQ7AgIVXhDh",
-    "ID_Drive_Mesa": "1ql7DwrxPiSleM8LnacDKdcIVRZekba3B",
-    "Link_Drive_Mesa": "https://drive.google.com/file/d/1ql7DwrxPiSleM8LnacDKdcIVRZekba3B/view?usp=drivesdk",
-    "Observaciones_Tecnicas": "Alerta: variación cromática (ΔE=84.15) | Piso limpio (95.4%)"
+    "ID_Drive_RAW": "1Ardj5lsqa53KsOHzc_UyH3YS4K58ucH4",
+    "ID_Drive_Mesa": "1i647iJSyNmGKEdiP8dQu64odzabI_8CV",
+    "Link_Drive_Mesa": "https://drive.google.com/file/d/1i647iJSyNmGKEdiP8dQu64odzabI_8CV/view",
+    "Observaciones_Tecnicas": "Gemini alejo sujeto (0.737x) • Python SIFT corrigio zoom-out restituyendo escala exacta 1.000x (1:1) • Base limpia (100 pct)"
   }
 ]
