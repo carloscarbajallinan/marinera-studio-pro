@@ -443,7 +443,131 @@
       return '';
     }
 
-    // 2. LIVE FETCH FROM GOOGLE SHEETS (GVIZ ENDPOINT + JSONP FALLBACK PARA FILE:///)
+    // 2. SISTEMA DE EVALUACIÓN INTERACTIVA DE CARLOS (CORRECTO / INCORRECTO PERSISTENTE)
+    const QA_STORAGE_KEY = 'marinera_carlos_qa_decisions_v2';
+    let carlosDecisions = {};
+    try {
+      carlosDecisions = JSON.parse(localStorage.getItem(QA_STORAGE_KEY) || '{}');
+    } catch (e) {
+      carlosDecisions = {};
+    }
+
+    function saveCarlosDecisions() {
+      localStorage.setItem(QA_STORAGE_KEY, JSON.stringify(carlosDecisions));
+      renderCarlosDecisionBar();
+    }
+
+    function getDecisionKey(scope, id, batchOrRow = '') {
+      return scope === 'sandbox' ? `SB_${batchOrRow}_ID${id}` : `PROD_ID${id}`;
+    }
+
+    function setPhotoDecision(scope, id, batchOrRow, verdict, reason = '') {
+      const key = getDecisionKey(scope, id, batchOrRow);
+      if (carlosDecisions[key] && carlosDecisions[key].verdict === verdict && !reason) {
+        delete carlosDecisions[key]; // Segundo clic desmarca
+      } else {
+        const prevReason = (carlosDecisions[key] && carlosDecisions[key].reason) || '';
+        carlosDecisions[key] = {
+          scope,
+          id: String(id),
+          batch: String(batchOrRow || ''),
+          verdict, // 'CORRECTO' | 'INCORRECTO'
+          reason: reason || prevReason || (verdict === 'INCORRECTO' ? 'Reintentar con ajuste' : 'Aprobado visualmente'),
+          updatedAt: new Date().toLocaleTimeString()
+        };
+      }
+      saveCarlosDecisions();
+      if (currentTab === 'sandbox') renderSandboxCards();
+      else renderProductionView();
+      updateModalDecisionButtons();
+    }
+
+    function setPhotoReason(scope, id, batchOrRow, reasonText) {
+      const key = getDecisionKey(scope, id, batchOrRow);
+      if (!carlosDecisions[key]) {
+        carlosDecisions[key] = { scope, id: String(id), batch: String(batchOrRow || ''), verdict: 'INCORRECTO', reason: reasonText, updatedAt: new Date().toLocaleTimeString() };
+      } else {
+        carlosDecisions[key].reason = reasonText;
+      }
+      saveCarlosDecisions();
+    }
+
+    function getApprovedAndRejectedLists() {
+      const approvedIds = new Set();
+      const rejectedIds = new Set();
+      const rejectedDetails = [];
+      Object.values(carlosDecisions).forEach(d => {
+        if (d.verdict === 'CORRECTO') {
+          approvedIds.add(Number(d.id) || d.id);
+          rejectedIds.delete(Number(d.id) || d.id);
+        } else if (d.verdict === 'INCORRECTO') {
+          rejectedIds.add(Number(d.id) || d.id);
+          approvedIds.delete(Number(d.id) || d.id);
+          rejectedDetails.push(`ID #${d.id} (${d.reason || 'Reintentar'})`);
+        }
+      });
+      return {
+        approved: Array.from(approvedIds),
+        rejected: Array.from(rejectedIds),
+        rejectedDetails
+      };
+    }
+
+    function copyColabCommand() {
+      const { approved, rejected, rejectedDetails } = getApprovedAndRejectedLists();
+      const snippet = [
+        `# === DECISIONES DE CARLOS EXPORTADAS DESDE LA PLATAFORMA WEB ===`,
+        `IDS_APROBADOS_CARLOS = ${JSON.stringify(approved)}`,
+        `IDS_REINTENTAR_MANUAL = ${JSON.stringify(rejected)}`,
+        rejectedDetails.length ? `# Motivos de rechazo: ${rejectedDetails.join(' | ')}` : `# Sin rechazos pendientes`
+      ].join('\n');
+      navigator.clipboard.writeText(snippet).then(() => {
+        const btn = document.getElementById('btnCopyColabCmd');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.innerHTML = '✅ ¡Copiado al Portapapeles para Colab!';
+          setTimeout(() => { btn.innerHTML = orig; }, 2500);
+        }
+      });
+    }
+
+    function clearAllDecisions() {
+      if (!confirm('¿Deseas limpiar todas las marcas locales de Correcto / Incorrecto?')) return;
+      carlosDecisions = {};
+      saveCarlosDecisions();
+      renderSandboxCards();
+      renderProductionView();
+    }
+
+    function renderCarlosDecisionBar() {
+      let bar = document.getElementById('carlosDecisionStickyBar');
+      if (!bar) {
+        const mainEl = document.querySelector('main');
+        if (!mainEl) return;
+        bar = document.createElement('div');
+        bar.id = 'carlosDecisionStickyBar';
+        bar.className = 'mb-6 bg-slate-900/95 border border-amber-500/40 rounded-2xl p-3.5 shadow-2xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3';
+        mainEl.insertBefore(bar, mainEl.firstChild);
+      }
+      const { approved, rejected } = getApprovedAndRejectedLists();
+      bar.innerHTML = `
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold">🎛️ Mesa de Decisión de Carlos</span>
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">✅ Correctos (Aprobar): <strong>${approved.length}</strong> ${approved.length ? '[' + approved.slice(0, 8).join(', ') + (approved.length > 8 ? '...' : '') + ']' : ''}</span>
+          <span class="px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold">❌ Incorrectos (Reintentar): <strong>${rejected.length}</strong> ${rejected.length ? '[' + rejected.slice(0, 8).join(', ') + (rejected.length > 8 ? '...' : '') + ']' : ''}</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 self-end lg:self-auto">
+          <button id="btnCopyColabCmd" onclick="copyColabCommand()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 transition shadow">
+            📋 Copiar Listas para Colab (Aprobar / Reintentar)
+          </button>
+          <button onclick="clearAllDecisions()" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+            Limpiar Marcas
+          </button>
+        </div>
+      `;
+    }
+
+    // 2.5 LIVE FETCH FROM GOOGLE SHEETS (GVIZ ENDPOINT + JSONP FALLBACK PARA FILE:///)
     function parseGvizTable(rawTable, includeSheetRow = false) {
       const cols = rawTable.table.cols.map((c, i) => c.label || c.id || `col_${i}`);
       return rawTable.table.rows.map((r, rowIdx) => {
@@ -515,11 +639,13 @@
         if (Array.isArray(prRows) && prRows.length > 0) prodItems = prRows;
 
         updateCounters();
+        renderCarlosDecisionBar();
         renderSandboxCards();
         renderProductionView();
         statusText.textContent = `Sincronizado con Sheet: ${new Date().toLocaleTimeString()}`;
       } catch (err) {
         console.warn('Usando dataset embebido actualizado:', err);
+        renderCarlosDecisionBar();
         statusText.textContent = `Datos locales sincronizados (${sandboxItems.length} pruebas)`;
       } finally {
         syncIcon.classList.remove('animate-spin');
@@ -627,6 +753,7 @@
 
     function renderSandboxCards() {
       renderSandboxBatchPills();
+      renderCarlosDecisionBar();
       const grid = document.getElementById('sandboxCardsGrid');
       if (!grid) return;
       grid.innerHTML = '';
@@ -642,7 +769,7 @@
       });
 
       let items = sandboxItems.map((item, idx) => {
-        const b = item.Test_Batch_ID || 'DESCONOCIDO';
+        const b = it.Test_Batch_ID || item.Test_Batch_ID || 'DESCONOCIDO';
         batchCounters[b] = (batchCounters[b] || 0) + 1;
         const sheetRow = Number(item.Sheet_Row || (idx + 2));
         return {
@@ -659,7 +786,6 @@
       }
 
       if (sandboxSortOrder === 'NEWEST') {
-        // Lote más reciente primero (Filas 12-16 arriba), y DENTRO de cada lote orden natural de producción (Fila 12 -> 13 -> 14 -> 15 -> 16)
         items.sort((a, b) => {
           if (b._batchOrder !== a._batchOrder) return b._batchOrder - a._batchOrder;
           return a._sheetRow - b._sheetRow;
@@ -693,6 +819,11 @@
         const posInBatch = item._posInBatch;
         const batchTotal = item._batchTotal;
 
+        const decKey = getDecisionKey('sandbox', idCat, batchId);
+        const dec = carlosDecisions[decKey];
+        const isApproved = dec && dec.verdict === 'CORRECTO';
+        const isRejected = dec && dec.verdict === 'INCORRECTO';
+
         const driveMesaId = extractDriveId(item.ID_Drive_Mesa) || extractDriveId(item.Link_Drive_Mesa) || extractDriveId(item.Vista_PRO_Test);
         const origProd = prodItems.find(p => String(p.ID) === String(idCat));
         const origId = extractDriveId(item.Vista_Original) || (origProd ? extractDriveId(origProd.ID_Archivo_Original) : '') || extractDriveId(item.orig_drive_id) || '1FbJY50m7dM-QBZ81pQfK4jRFazy3BX4m';
@@ -704,8 +835,12 @@
         else if (resVisual.includes('ERROR') || resVisual.includes('REVISION_MANUAL')) badgeClass = 'badge-warn';
 
         const isLatestBatch = batchId === latestBatchId;
+        let borderStyle = isLatestBatch ? 'border-amber-500/40' : 'border-slate-800';
+        if (isApproved) borderStyle = 'border-emerald-500 ring-1 ring-emerald-500/40';
+        if (isRejected) borderStyle = 'border-rose-500 ring-1 ring-rose-500/40';
+
         const card = document.createElement('div');
-        card.className = `bg-[#121927] border ${isLatestBatch ? 'border-amber-500/40' : 'border-slate-800'} rounded-2xl p-5 flex flex-col space-y-4 shadow-xl hover:border-slate-700 transition`;
+        card.className = `bg-[#121927] border ${borderStyle} rounded-2xl p-5 flex flex-col space-y-4 shadow-xl hover:border-slate-700 transition`;
         card.innerHTML = `
           <div class="flex items-center justify-between flex-wrap gap-1.5">
             <div class="flex items-center space-x-2 flex-wrap gap-y-1">
@@ -759,11 +894,31 @@
             <span class="text-amber-400 font-semibold">Diagnóstico:</span> ${obs || 'Procesado correctamente.'}
           </p>
 
-          <div class="flex items-center justify-between pt-1">
-            <span class="text-[10px] text-slate-500">${item.Timestamp || ''}</span>
-            <button onclick="openModalCompare('${idCat}', '${origUrl}', '${proUrl}', '${resVisual}', '${score}', '${delta}', '${item.Link_Drive_Mesa || '#' }')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 border border-amber-500/30 transition">
-              Pantalla Completa
-            </button>
+          <!-- BOTONES DE DECISIÓN DE CARLOS (CORRECTO / INCORRECTO) -->
+          <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800 flex flex-col space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <button onclick="setPhotoDecision('sandbox', '${idCat}', '${batchId}', 'CORRECTO')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 ${isApproved ? 'bg-emerald-500 text-slate-950 shadow-lg' : 'bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 border border-emerald-500/30'}">
+                <span>✅ Correcto</span>
+              </button>
+              <button onclick="setPhotoDecision('sandbox', '${idCat}', '${batchId}', 'INCORRECTO')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 ${isRejected ? 'bg-rose-500 text-white shadow-lg' : 'bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 border border-rose-500/30'}">
+                <span>❌ Incorrecto</span>
+              </button>
+              <button onclick="openModalCompare('${idCat}', '${origUrl}', '${proUrl}', '${resVisual}', '${score}', '${delta}', '${item.Link_Drive_Mesa || '#' }', 'sandbox', '${batchId}')" class="py-2 px-3 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 border border-amber-500/30 transition">
+                🔍 Ampliar
+              </button>
+            </div>
+            ${isRejected ? `
+              <div class="flex items-center space-x-1.5 pt-1">
+                <span class="text-[10px] text-rose-300 font-semibold">Motivo:</span>
+                <select onchange="setPhotoReason('sandbox', '${idCat}', '${batchId}', this.value)" class="flex-1 bg-slate-950 border border-rose-500/40 rounded px-2 py-1 text-[11px] text-slate-200">
+                  <option value="Alejó sujeto (Zoom-out)" ${dec.reason === 'Alejó sujeto (Zoom-out)' ? 'selected' : ''}>Alejó sujeto (Zoom-out)</option>
+                  <option value="Inventó pies o pañuelo" ${dec.reason === 'Inventó pies o pañuelo' ? 'selected' : ''}>Inventó pies o pañuelo</option>
+                  <option value="Cambió forma de falda / corte" ${dec.reason === 'Cambió forma de falda / corte' ? 'selected' : ''}>Cambió forma de falda / corte</option>
+                  <option value="Bordes blancos laterales" ${dec.reason === 'Bordes blancos laterales' ? 'selected' : ''}>Bordes blancos laterales (Manual)</option>
+                  <option value="Reintentar con ajuste" ${!['Alejó sujeto (Zoom-out)','Inventó pies o pañuelo','Cambió forma de falda / corte','Bordes blancos laterales'].includes(dec.reason) ? 'selected' : ''}>Otro / Reintentar en Colab</option>
+                </select>
+              </div>
+            ` : ''}
           </div>
         `;
         grid.appendChild(card);
@@ -789,10 +944,7 @@
       handle.addEventListener('mousedown', () => isDown = true);
       window.addEventListener('mouseup', () => isDown = false);
       window.addEventListener('mousemove', (e) => { if (isDown) update(e.clientX); });
-
       container.addEventListener('click', (e) => update(e.clientX));
-      
-      // Touch support for tablets/mobile
       handle.addEventListener('touchstart', () => isDown = true);
       window.addEventListener('touchend', () => isDown = false);
       window.addEventListener('touchmove', (e) => { if (isDown && e.touches[0]) update(e.touches[0].clientX); });
@@ -803,6 +955,7 @@
       prodFilterState = state;
       ['ALL', 'PENDIENTE', 'REVISION', 'APROBADO'].forEach(s => {
         const btn = document.getElementById('filterBtn-' + s);
+        if (!btn) return;
         if (s === state) {
           btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-400 text-slate-950 transition';
         } else {
@@ -826,6 +979,7 @@
     }
 
     function renderProductionView() {
+      renderCarlosDecisionBar();
       const search = (document.getElementById('prodSearchInput').value || '').toLowerCase();
       const cat = document.getElementById('prodCategorySelect').value;
 
@@ -851,9 +1005,9 @@
       document.getElementById('prodShowingCount').textContent = `Mostrando ${filtered.length} de ${prodItems.length} productos`;
 
       if (prodViewMode === 'grid') {
-        renderProdGrid(filtered.slice(0, 100)); // Render first 100 for high FPS
+        renderProdGrid(filtered.slice(0, 120));
       } else {
-        renderProdTable(filtered.slice(0, 100));
+        renderProdTable(filtered.slice(0, 120));
       }
     }
 
@@ -865,15 +1019,26 @@
         const origId = item.ID_Archivo_Original;
         const proId = item.ID_Archivo_PRO;
         const st = String(item.Estado || 'PENDIENTE').toUpperCase();
-        const origUrl = origId ? `https://lh3.googleusercontent.com/d/${origId}=s300` : 'https://placehold.co/300x300/121927/D4AF37?text=Original';
-        const proUrl = proId && proId !== '-' ? `https://lh3.googleusercontent.com/d/${proId}=s300` : null;
+        const origUrl = origId ? `https://lh3.googleusercontent.com/d/${origId}=s400` : 'https://placehold.co/300x300/121927/D4AF37?text=Original';
+        const proUrl = proId && proId !== '-' ? `https://lh3.googleusercontent.com/d/${proId}=s400` : null;
+
+        const decKey = getDecisionKey('prod', item.ID);
+        const dec = carlosDecisions[decKey];
+        const isApproved = dec && dec.verdict === 'CORRECTO';
+        const isRejected = dec && dec.verdict === 'INCORRECTO';
 
         let badge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold badge-info">PENDIENTE</span>';
-        if (st.includes('APROBADO')) badge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold badge-ok">APROBADO</span>';
+        if (isApproved) badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-950">✅ CORRECTO</span>';
+        else if (isRejected) badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500 text-white">❌ INCORRECTO</span>';
+        else if (st.includes('APROBADO')) badge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold badge-ok">APROBADO</span>';
         else if (st.includes('REVISION')) badge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold badge-warn">EN REVISIÓN</span>';
 
+        let borderClass = 'border-slate-800';
+        if (isApproved) borderClass = 'border-emerald-500 ring-1 ring-emerald-500/40';
+        if (isRejected) borderClass = 'border-rose-500 ring-1 ring-rose-500/40';
+
         const card = document.createElement('div');
-        card.className = 'bg-[#121927] border border-slate-800 rounded-xl overflow-hidden p-3 flex flex-col space-y-2 hover:border-slate-700 transition';
+        card.className = `bg-[#121927] border ${borderClass} rounded-xl overflow-hidden p-3 flex flex-col space-y-2 hover:border-slate-700 transition`;
         card.innerHTML = `
           <div class="relative w-full aspect-square rounded-lg overflow-hidden bg-slate-950 flex items-center justify-center">
             <img src="${proUrl || origUrl}" alt="Thumb" class="w-full h-full object-cover">
@@ -884,9 +1049,13 @@
             ${badge}
           </div>
           <p class="text-[11px] font-medium text-slate-200 truncate" title="${item.Nombre_Carpeta_Producto || item.Nombre_Archivo_Original}">${item.Nombre_Carpeta_Producto || item.Nombre_Archivo_Original}</p>
+          <div class="grid grid-cols-2 gap-1.5 pt-1">
+            <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'CORRECTO')" class="py-1 px-2 rounded text-[11px] font-bold transition ${isApproved ? 'bg-emerald-500 text-slate-950' : 'bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 border border-emerald-500/30'}">✅ Correcto</button>
+            <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'INCORRECTO')" class="py-1 px-2 rounded text-[11px] font-bold transition ${isRejected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 border border-rose-500/30'}">❌ Incorrecto</button>
+          </div>
           <div class="pt-1 flex items-center justify-between text-[11px]">
-            <a href="${item.Link_Drive_Original || '#'}" target="_blank" class="text-slate-500 hover:text-slate-300">Drive</a>
-            ${proUrl ? `<button onclick="openModalCompare('${item.ID}', '${origUrl}', '${proUrl}', '${st}', '${item.Score_QA || 95}', '3.0', '${item.Link_Drive_PRO || '#'}')" class="text-amber-400 font-semibold hover:underline">Comparar</button>` : '<span class="text-slate-600">Sin PRO</span>'}
+            <a href="${item.Link_Drive_Original || '#'}" target="_blank" class="text-slate-500 hover:text-slate-300">Drive Orig</a>
+            <button onclick="openModalCompare('${item.ID}', '${origUrl}', '${proUrl || origUrl}', '${st}', '${item.Score_QA || 95}', '${item.Delta_E_Color || 3.0}', '${item.Link_Drive_PRO || item.Link_Drive_Original || '#'}', 'prod', '')" class="text-amber-400 font-semibold hover:underline">🔍 Comparar</button>
           </div>
         `;
         grid.appendChild(card);
@@ -903,6 +1072,10 @@
         const st = String(item.Estado || 'PENDIENTE').toUpperCase();
         const origUrl = origId ? `https://lh3.googleusercontent.com/d/${origId}=s200` : '';
         const proUrl = proId && proId !== '-' ? `https://lh3.googleusercontent.com/d/${proId}=s200` : '';
+        const decKey = getDecisionKey('prod', item.ID);
+        const dec = carlosDecisions[decKey];
+        const isApproved = dec && dec.verdict === 'CORRECTO';
+        const isRejected = dec && dec.verdict === 'INCORRECTO';
 
         const tr = document.createElement('tr');
         tr.className = 'hover:bg-slate-900/40 transition';
@@ -912,19 +1085,41 @@
           <td class="p-3">${proUrl ? `<img src="${proUrl}" class="w-10 h-10 object-cover rounded bg-slate-950 border border-amber-500/40">` : '<span class="text-slate-600">-</span>'}</td>
           <td class="p-3 max-w-xs truncate">${item.Nombre_Carpeta_Producto || item.Ruta_Carpeta_Drive}</td>
           <td class="p-3 font-mono text-[11px] text-slate-400">${item.Nombre_Archivo_Original}</td>
-          <td class="p-3">${st.includes('APROBADO') ? '<span class="badge-ok px-2 py-0.5 rounded text-[10px]">APROBADO</span>' : (st.includes('REVISION') ? '<span class="badge-warn px-2 py-0.5 rounded text-[10px]">REVISIÓN</span>' : '<span class="badge-info px-2 py-0.5 rounded text-[10px]">PENDIENTE</span>')}</td>
+          <td class="p-3">${isApproved ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-950">✅ CORRECTO</span>' : (isRejected ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500 text-white">❌ INCORRECTO</span>' : (st.includes('APROBADO') ? '<span class="badge-ok px-2 py-0.5 rounded text-[10px]">APROBADO</span>' : (st.includes('REVISION') ? '<span class="badge-warn px-2 py-0.5 rounded text-[10px]">REVISIÓN</span>' : '<span class="badge-info px-2 py-0.5 rounded text-[10px]">PENDIENTE</span>')))}</td>
           <td class="p-3 font-bold">${item.Score_QA || '-'}</td>
-          <td class="p-3 text-right">
-            ${proUrl ? `<button onclick="openModalCompare('${item.ID}', '${origUrl}', '${proUrl}', '${st}', '${item.Score_QA || 95}', '3.0', '${item.Link_Drive_PRO || '#'}')" class="text-amber-400 hover:underline">Ver</button>` : '<a href="' + (item.Link_Drive_Original || '#') + '" target="_blank" class="text-slate-500 hover:underline">Orig</a>'}
+          <td class="p-3 text-right space-x-1">
+            <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'CORRECTO')" class="px-2 py-1 rounded text-[10px] font-bold ${isApproved ? 'bg-emerald-500 text-slate-950' : 'bg-emerald-500/15 text-emerald-300'}">✅</button>
+            <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'INCORRECTO')" class="px-2 py-1 rounded text-[10px] font-bold ${isRejected ? 'bg-rose-500 text-white' : 'bg-rose-500/15 text-rose-300'}">❌</button>
+            <button onclick="openModalCompare('${item.ID}', '${origUrl}', '${proUrl || origUrl}', '${st}', '${item.Score_QA || 95}', '3.0', '${item.Link_Drive_PRO || item.Link_Drive_Original || '#'}', 'prod', '')" class="text-amber-400 hover:underline text-xs pl-1">Ver</button>
           </td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // 5. MODAL COMPARE LOGIC
-    function openModalCompare(id, origUrl, proUrl, status, score, delta, driveLink) {
-      document.getElementById('modalTitle').textContent = `Comparación de Calidad: ID #${id}`;
+    // 5. MODAL COMPARE LOGIC CON BOTONES CORRECTO / INCORRECTO
+    let currentModalCtx = { scope: 'sandbox', id: '', batch: '' };
+
+    function updateModalDecisionButtons() {
+      const container = document.getElementById('modalDecisionControls');
+      if (!container || !currentModalCtx.id) return;
+      const key = getDecisionKey(currentModalCtx.scope, currentModalCtx.id, currentModalCtx.batch);
+      const dec = carlosDecisions[key];
+      const isApproved = dec && dec.verdict === 'CORRECTO';
+      const isRejected = dec && dec.verdict === 'INCORRECTO';
+      container.innerHTML = `
+        <button onclick="setPhotoDecision('${currentModalCtx.scope}', '${currentModalCtx.id}', '${currentModalCtx.batch}', 'CORRECTO')" class="px-4 py-2 rounded-lg text-xs font-bold transition ${isApproved ? 'bg-emerald-500 text-slate-950 shadow-lg' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25'}">
+          ✅ Marcar Correcto
+        </button>
+        <button onclick="setPhotoDecision('${currentModalCtx.scope}', '${currentModalCtx.id}', '${currentModalCtx.batch}', 'INCORRECTO')" class="px-4 py-2 rounded-lg text-xs font-bold transition ${isRejected ? 'bg-rose-500 text-white shadow-lg' : 'bg-rose-500/15 text-rose-300 border border-rose-500/30 hover:bg-rose-500/25'}">
+          ❌ Marcar Incorrecto (Reintentar)
+        </button>
+      `;
+    }
+
+    function openModalCompare(id, origUrl, proUrl, status, score, delta, driveLink, scope = 'sandbox', batch = '') {
+      currentModalCtx = { scope, id, batch };
+      document.getElementById('modalTitle').textContent = `Comparación de Calidad: ID #${id} ${batch ? '(' + batch + ')' : ''}`;
       document.getElementById('modalValId').textContent = id;
       document.getElementById('modalValStatus').textContent = status;
       document.getElementById('modalValScore').textContent = score + '/100';
@@ -933,6 +1128,16 @@
 
       document.getElementById('modalImgOrig').src = origUrl;
       document.getElementById('modalImgPro').src = proUrl;
+
+      let ctrlBox = document.getElementById('modalDecisionControls');
+      if (!ctrlBox) {
+        const footer = document.getElementById('modalDriveLink').parentNode;
+        ctrlBox = document.createElement('div');
+        ctrlBox.id = 'modalDecisionControls';
+        ctrlBox.className = 'flex items-center space-x-2';
+        footer.insertBefore(ctrlBox, footer.lastElementChild);
+      }
+      updateModalDecisionButtons();
 
       document.getElementById('compareModal').classList.remove('hidden');
       setupCardSlider('modalCompareContainer');
