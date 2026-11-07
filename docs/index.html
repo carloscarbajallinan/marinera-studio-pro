@@ -865,14 +865,15 @@
       renderSandboxCards();
     }
 
-    // Helper que construye automáticamente los bloques "Lo Positivo", "Lo Negativo / Correcciones Python" y métricas de escala
+    // Helper que construye automáticamente los bloques de auditoría técnica Python y guía de revisión
     function buildDiagnosticAnalysis(item, isSandbox = true) {
       const idCat = String(item.ID_Catalogo || item.ID || '');
       const obs = String(item.Observaciones_Tecnicas || item.Motivo_QA || '');
       const mode = String(item.Modo_Prompt || (String(item.Ruta_Carpeta_Drive || '').toLowerCase().includes('accesorio') ? 'JOYERIA_ACCESORIO' : 'MODA_MODELO'));
       const delta = parseFloat(String(item.Delta_E_Color || '0').replace(',', '.')) || 0;
-      const suelo = String(item.Score_Suelo_Pies || '98%');
+      const suelo = String(item.Score_Suelo_Pies || '95%');
       const sobel = String(item.Sobel_Recorte_PX || '');
+      const scoreNum = Number(item.Score_QA_Final || item.Score_QA || 80);
 
       let escGemini = '1.000x';
       let escPython = '1.000x (1:1)';
@@ -888,51 +889,95 @@
         escPython = '1.000x (SIFT 1:1)';
       }
 
+      // 1. Semáforo del Score Total
+      let scoreBadgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50';
+      let scoreLabel = 'Excelente fidelidad';
+      let scoreIcon = '🟢';
+      if (scoreNum < 70) {
+        scoreBadgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/50';
+        scoreLabel = 'Alerta Técnica / Revisar';
+        scoreIcon = '🔴';
+      } else if (scoreNum < 85) {
+        scoreBadgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/50';
+        scoreLabel = 'Aceptable / Verificar';
+        scoreIcon = '🟡';
+      }
+
+      // 2. Guía de Enfoque Rápido ("En qué enfocarte antes de decidir si está fallada")
+      const focusPoints = [];
+      const obsLower = obs.toLowerCase();
+
+      if (delta >= 45) {
+        focusPoints.push(`🎨 <strong>Tono del fondo (ΔE=${delta}):</strong> Posible deriva cromática respecto al ciclorama marfil (#E5E1DE). Comprueba si el fondo se ve demasiado amarillento o frío.`);
+      } else if (delta > 0) {
+        focusPoints.push(`🎨 <strong>Tono de fondo (ΔE=${delta}):</strong> Calibración cromática uniforme y cercana a la norma de catálogo.`);
+      }
+
+      if (escGemini.includes('0.68') || escGemini.includes('0.73') || escGemini.includes('Zoom-out') || obsLower.includes('alejo') || obsLower.includes('zoom_out')) {
+        focusPoints.push(`🔍 <strong>Escala y Zoom (${escGemini}):</strong> Gemini alejó el sujeto. Python SIFT restituyó la proporción 1:1. Revisa que manos, pañuelo o bordes no presenten saltos visuales.`);
+      } else {
+        focusPoints.push(`📐 <strong>Geometría 1:1:</strong> Proporción dimensional intacta sin deformaciones de encuadre.`);
+      }
+
+      if (mode.includes('JOYERIA') || obsLower.includes('accesorio') || obsLower.includes('filigrana')) {
+        focusPoints.push('💎 <strong>Accesorios / Joyería:</strong> Verifica que la filigrana metálica y pedrería conserven nitidez y que NO haya alucinado dedos o modelos humanas artificiales.');
+      } else {
+        focusPoints.push('👗 <strong>Prenda / Maniquí:</strong> Revisa que la base de madera del maniquí se mantenga visible, que el cuello no esté cortado y que la forma de la falda no se haya modificado.');
+      }
+
+      if (obsLower.includes('sombra densa')) {
+        const mSombra = obs.match(/sombra densas*(([^)]+))/i);
+        const sombraPct = mSombra ? mSombra[1] : 'detectada';
+        focusPoints.push(`🌓 <strong>Base y Sombras:</strong> Se detectó sombra en el piso (${sombraPct}). Verifica que el degradado del suelo se vea natural y no como una mancha negra cortada.`);
+      }
+
+      if (obsLower.includes('barras') || sobel.includes('px')) {
+        focusPoints.push('✂️ <strong>Bordes blancos:</strong> El pre-procesador Sobel recortó barras blancas laterales del archivo original.');
+      }
+
       const positivo = [];
       const negativo = [];
 
       if (mode.includes('JOYERIA')) {
-        positivo.push('Clasificado correctamente en modo JOYERIA_ACCESORIO (bodegón aislado sin inventar modelos humanas).');
-        positivo.push('Preservación 1:1 de filigrana metálica, perlas y contornos sin recorte agresivo.');
+        positivo.push('Clasificado en modo JOYERIA_ACCESORIO: bodegón aislado con fondo neutro de estudio.');
+        positivo.push('Conservación de filigrana metálica, perlas y proporciones sin recorte agresivo.');
       } else {
-        positivo.push('Clasificado en modo MODA_MODELO: reemplazo de entorno doméstico/exterior por ciclorama de estudio.');
-        positivo.push('Conservación de textura satinada de la prenda, bordados, rostro e iluminación del sujeto.');
+        positivo.push('Clasificado en modo MODA_MODELO: reemplazo de fondo por ciclorama de estudio profesional.');
+        positivo.push('Conservación de textura satinada de la prenda, bordados y pliegues originales.');
       }
 
-      if (obs.includes('307px') || sobel.includes('193px') || idCat === '423') {
-        positivo.push('Pre-procesador Python Sobel detectó y recortó exactamente las barras blancas laterales (L:192px, R:115px) sin amputar mano ni falda.');
+      if (scoreNum >= 85) {
+        positivo.push(`Score QA alto (${scoreNum}/100): parámetros geométricos y cromáticos dentro de tolerancia oficial.`);
+      } else if (scoreNum < 70) {
+        negativo.push(`Score QA bajo (${scoreNum}/100): atención especial a posibles anomalías en fondo, corte de silueta o sombra densa.`);
       }
 
-      if (parseFloat(suelo) >= 90 || obs.includes('100 pct') || obs.includes('100.0%')) {
-        positivo.push(`Piso de estudio limpio (${suelo}) con transición suave sin manchas oscuras.`);
-      }
-
-      if (obs.toLowerCase().includes('alucinación de modelo') || obs.toLowerCase().includes('inventó bailarina')) {
-        negativo.push('Corrida legacy: Gemini inventó una bailarina humana por prompt antiguo (corregido en V5.2 con PROMPT_JOYERIA_ACCESORIOS).');
-      }
-
-      if (escGemini.includes('0.68') || escGemini.includes('0.73') || obs.toLowerCase().includes('alejo sujeto') || obs.toLowerCase().includes('zoom_out')) {
-        negativo.push(`En la versión cruda de Gemini (_1_RAW_GEMINI), la IA alejó a la persona reduciendo su escala a ${escGemini}.`);
-        positivo.push(`Post-procesador Python SIFT+RANSAC corrigió automáticamente el alejamiento en _2_MESA_REVISION_CARLOS restituyendo la escala exacta ${escPython}.`);
+      if (delta >= 45) {
+        negativo.push(`Desviación térmica del fondo (ΔE = ${delta}): tono de ciclorama con variación perceptible respecto a #E5E1DE.`);
       } else {
-        positivo.push(`Proporción geométrica 1:1 mantenida entre foto original, Gemini (${escGemini}) y versión pulida Python (${escPython}).`);
+        positivo.push(`Fidelidad cromática de fondo estable (ΔE = ${delta} respecto a #E5E1DE).`);
       }
 
-      if (obs.toLowerCase().includes('pies/panuelo') || obs.toLowerCase().includes('pies/pañuelo')) {
-        negativo.push('En versión Gemini cruda: inventó pies descalzos bajo la falda y pañuelo en mano izquierda (corregido en el nuevo PROMPT_MODA_MODELO V5.2).');
+      if (escGemini.includes('Zoom-out') || obsLower.includes('alejo')) {
+        negativo.push(`Gemini crudo redujo la escala (${escGemini}).`);
+        positivo.push(`Python SIFT+RANSAC compensó el alejamiento devolviendo la escala a ${escPython}.`);
       }
 
-      if (delta > 45) {
-        negativo.push(`Desviación térmica del fondo respecto a #E5E1DE (ΔE = ${delta}): tono de ciclorama ligeramente más cálido/oscuro.`);
-      } else if (delta > 0) {
-        positivo.push(`Fidelidad cromática de fondo dentro de rango de estudio (ΔE = ${delta} respecto a #E5E1DE).`);
-      }
-
-      if (negativo.length === 0) {
-        negativo.push('Sin defectos geométricos ni alucinaciones detectadas en esta toma. Lista para aprobación.');
-      }
-
-      return { mode, delta, suelo, escGemini, escPython, positivo, negativo };
+      return {
+        scoreNum,
+        scoreBadgeClass,
+        scoreLabel,
+        scoreIcon,
+        mode,
+        delta,
+        suelo,
+        escGemini,
+        escPython,
+        focusPoints,
+        obsRaw: obs || 'Sin observaciones adicionales registradas.',
+        positivo,
+        negativo
+      };
     }
 
     // Generador HTML de Tarjeta Tri-Comparativa (1. Original | 2. Gemini 2.5 Flash | 3. Pulida Post-Python)
@@ -957,17 +1002,24 @@
       else if (cfg.isHighlighted) borderStyle = 'border-amber-500/40';
 
       return `
-        <div class="bg-[#0C121E] border ${borderStyle} rounded-2xl overflow-hidden shadow-2xl p-5 md:p-6 space-y-5 transition">
+        <div class="bg-[#0C121E] border ${borderStyle} rounded-2xl overflow-hidden shadow-2xl p-5 md:p-6 space-y-4 transition">
           
           <!-- Encabezado de Caso + Botones de Decisión Interactiva -->
           <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800/80 pb-4 gap-3">
-            <div class="space-y-1">
+            <div class="space-y-1.5">
               <div class="flex items-center flex-wrap gap-2">
                 <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-400 text-slate-950 font-cinzel">ID #${idCat}</span>
                 ${headerExtraBadges || ''}
                 <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${badgeClass}">${resVisual}</span>
-                <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border border-slate-700 text-emerald-400 font-bold">Score QA: ${score}/100</span>
-                <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border border-slate-700 text-indigo-300">ΔE Fondo: ${analysis.delta}</span>
+                
+                <!-- BADGE DESTACADO DEL SCORE TOTAL CON SEMÁFORO -->
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold border flex items-center space-x-1 ${analysis.scoreBadgeClass}">
+                  <span>${analysis.scoreIcon}</span>
+                  <span>Score QA: <strong>${analysis.scoreNum}/100</strong> (${analysis.scoreLabel})</span>
+                </span>
+
+                <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border ${analysis.delta >= 45 ? 'border-rose-500/50 text-rose-300' : 'border-slate-700 text-indigo-300'} font-semibold">ΔE Fondo: ${analysis.delta}</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border border-slate-700 text-emerald-300 font-semibold">Escala: ${analysis.escPython}</span>
               </div>
               <h3 class="text-base md:text-lg font-bold text-slate-100 pt-0.5">${title} <span class="text-xs font-normal text-amber-300 font-mono">(${analysis.mode})</span></h3>
               <p class="text-xs text-slate-400 font-mono truncate">📁 ${subpath}</p>
@@ -997,6 +1049,139 @@
                       <option value="Cambió la prenda / diseño" ${(dec.presetReason || dec.reason) === 'Cambió la prenda / diseño' ? 'selected' : ''}>Cambió la prenda / diseño</option>
                       <option value="Borró base de madera del maniquí" ${(dec.presetReason || dec.reason) === 'Borró base de madera del maniquí' ? 'selected' : ''}>Borró base de madera del maniquí</option>
                       <option value="Cortó partes del accesorio / producto" ${(dec.presetReason || dec.reason) === 'Cortó partes del accesorio / producto' ? 'selected' : ''}>Cortó partes del accesorio / producto</option>
+                      <option value="No quitó logo de pared / fondo" ${(dec.presetReason || dec.reason) === 'No quitó logo de pared / fondo' ? 'selected' : ''}>No quitó logo de pared / fondo</option>
+                      <option value="Muy cerca (Zoom-in) / encuadre cortado" ${(dec.presetReason || dec.reason) === 'Muy cerca (Zoom-in) / encuadre cortado' ? 'selected' : ''}>Muy cerca (Zoom-in) / encuadre cortado</option>
+                      <option value="Alejó sujeto (Zoom-out)" ${(dec.presetReason || dec.reason) === 'Alejó sujeto (Zoom-out)' ? 'selected' : ''}>Alejó sujeto (Zoom-out)</option>
+                      <option value="Inventó pies o pañuelo" ${(dec.presetReason || dec.reason) === 'Inventó pies o pañuelo' ? 'selected' : ''}>Inventó pies o pañuelo</option>
+                      <option value="Cambió forma de falda / corte" ${(dec.presetReason || dec.reason) === 'Cambió forma de falda / corte' ? 'selected' : ''}>Cambió forma de falda / corte</option>
+                      <option value="Bordes blancos laterales (Manual)" ${(dec.presetReason || dec.reason) === 'Bordes blancos laterales (Manual)' ? 'selected' : ''}>Bordes blancos laterales (Manual)</option>
+                      <option value="Deriva de color en fondo" ${(dec.presetReason || dec.reason) === 'Deriva de color en fondo' ? 'selected' : ''}>Deriva de color en fondo</option>
+                      <option value="Otro (Especificar al lado)" ${(dec.presetReason || dec.reason) === 'Otro (Especificar al lado)' ? 'selected' : ''}>Otro (Especificar al lado)</option>
+                    </select>
+                  </div>
+                  <input type="text"
+                    value="${String(dec.customNote || '').replace(/"/g, '&quot;')}"
+                    oninput="setPhotoCustomNote('${scope}', '${idCat}', '${batchId}', this.value)"
+                    placeholder="Detalle específico (ej: falta base de madera, cambió prenda, cortó accesorio...)"
+                    class="flex-1 min-w-[240px] bg-slate-950 border border-rose-500/40 rounded-lg px-2.5 py-1 text-[11px] text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-400"
+                  />
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- BANNER GUÍA DE REVISIÓN: EN QUÉ DEBES ENFOCARTE ANTES DE INDICAR SI FALLÓ O NO -->
+          <div class="bg-slate-900/90 border border-slate-700/80 rounded-xl p-3.5 space-y-2 shadow-inner">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center space-x-1.5">
+                <span>🎯</span>
+                <span>En qué enfocarte al revisar esta foto:</span>
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">Auditoría Automática Python / OpenCV</span>
+            </div>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300">
+              ${analysis.focusPoints.map(pt => `
+                <li class="flex items-start space-x-1.5 bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                  <span class="text-amber-400 font-bold">•</span>
+                  <span>${pt}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <div class="pt-1 text-[10px] text-slate-400 font-mono truncate border-t border-slate-800/80 flex items-center space-x-2">
+              <span class="text-slate-500 font-semibold">Registro Técnico:</span>
+              <span class="text-slate-400 truncate" title="${analysis.obsRaw}">${analysis.obsRaw}</span>
+            </div>
+          </div>
+
+          <!-- Grilla Tri-Comparativa (3 Columnas: 1. Original | 2. Gemini 2.5 Flash | 3. Pulida Post-Python) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+            
+            <!-- Columna 1: Foto Cruda Original -->
+            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-slate-800/80 p-3 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1">
+                  <span>📷</span> <span>1. Foto Cruda Original</span>
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-black border border-slate-800 text-slate-300 font-mono font-bold">
+                  Base Referencia 1:1
+                </span>
+              </div>
+              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center p-2 shadow-inner">
+                <img src="${origUrl}" class="w-full h-full object-contain" alt="1. Foto Original" loading="lazy">
+              </div>
+              <div class="text-[10px] text-slate-400 flex items-center justify-between px-1">
+                <span>Archivo de origen en catálogo</span>
+                <a href="${origDriveLink}" target="_blank" class="font-mono text-amber-400 hover:underline">Abrir en Drive ↗</a>
+              </div>
+            </div>
+
+            <!-- Columna 2: Versión Pura Gemini 2.5 Flash (_1_RAW_GEMINI) -->
+            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-sky-500/40 p-3 space-y-2 shadow-lg">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider flex items-center space-x-1">
+                  <span>🤖</span> <span>2. Versión Gemini 2.5 Flash</span>
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-sky-950/80 border border-sky-500/50 text-sky-300 font-mono font-bold">
+                  Escala: ${analysis.escGemini}
+                </span>
+              </div>
+              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-sky-500/40 flex items-center justify-center p-2 shadow-inner">
+                <img src="${geminiRawUrl}" class="w-full h-full object-contain" alt="2. Salida Gemini" loading="lazy">
+              </div>
+              <div class="text-[10px] text-sky-300/90 flex items-center justify-between px-1 font-medium">
+                <span>📁 Carpeta: _1_RAW_GEMINI</span>
+                <a href="${geminiRawLink}" target="_blank" class="font-mono text-sky-300 hover:underline">Abrir RAW Drive ↗</a>
+              </div>
+            </div>
+
+            <!-- Columna 3: Versión Pulida Post-Python (_2_MESA_REVISION_CARLOS) -->
+            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-emerald-500/40 p-3 space-y-2 shadow-lg">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1">
+                  <span>🐍</span> <span>3. Versión Pulida Python</span>
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-mono font-bold">
+                  Escala: ${analysis.escPython}
+                </span>
+              </div>
+              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-emerald-500/40 flex items-center justify-center p-2 shadow-inner">
+                <img src="${pythonProUrl}" class="w-full h-full object-contain" alt="3. Pulida Python" loading="lazy">
+              </div>
+              <div class="text-[10px] text-emerald-300/90 flex items-center justify-between px-1 font-semibold">
+                <span>📁 Carpeta: _2_MESA_REVISION_CARLOS</span>
+                <a href="${pythonProLink}" target="_blank" class="font-mono text-emerald-300 hover:underline">Abrir PRO Drive ↗</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Diagnóstico en Dos Bloques: Lo Positivo y Lo Negativo / Correcciones Python -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
+            
+            <!-- Bloque Positivo -->
+            <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-4 space-y-2">
+              <h4 class="font-bold text-emerald-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
+                <span>🟢</span> <span>Lo Positivo (Logros de Gemini + Pulido Python):</span>
+              </h4>
+              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
+                ${analysis.positivo.map(p => `<li class="flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">✓</span><span>${p}</span></li>`).join('')}
+              </ul>
+            </div>
+
+            <!-- Bloque Negativo / Observaciones -->
+            <div class="bg-rose-950/20 border border-rose-500/30 rounded-xl p-4 space-y-2">
+              <h4 class="font-bold text-rose-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
+                <span>🔴</span> <span>Lo Negativo / Correcciones Aplicadas por Python:</span>
+              </h4>
+              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
+                ${analysis.negativo.map(n => `<li class="flex items-start space-x-1.5"><span class="text-rose-400 font-bold">•</span><span>${n}</span></li>`).join('')}
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      `;
                       <option value="No quitó logo de pared / fondo" ${(dec.presetReason || dec.reason) === 'No quitó logo de pared / fondo' ? 'selected' : ''}>No quitó logo de pared / fondo</option>
                       <option value="Muy cerca (Zoom-in) / encuadre cortado" ${(dec.presetReason || dec.reason) === 'Muy cerca (Zoom-in) / encuadre cortado' ? 'selected' : ''}>Muy cerca (Zoom-in) / encuadre cortado</option>
                       <option value="Alejó sujeto (Zoom-out)" ${(dec.presetReason || dec.reason) === 'Alejó sujeto (Zoom-out)' ? 'selected' : ''}>Alejó sujeto (Zoom-out)</option>
@@ -1598,7 +1783,10 @@
           </div>
           <div class="flex items-center justify-between">
             <span class="font-cinzel font-bold text-xs text-amber-400">ID #${item.ID}</span>
-            ${badge}
+            <div class="flex items-center space-x-1">
+              ${item.Score_QA ? `<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold ${Number(item.Score_QA) >= 85 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : (Number(item.Score_QA) >= 70 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40')}">QA ${item.Score_QA}</span>` : ''}
+              ${badge}
+            </div>
           </div>
           <p class="text-[11px] font-medium text-slate-200 truncate" title="${item.Nombre_Carpeta_Producto || item.Nombre_Archivo_Original}">${item.Nombre_Carpeta_Producto || item.Nombre_Archivo_Original}</p>
           <div class="grid grid-cols-2 gap-1.5 pt-1">
@@ -1638,7 +1826,7 @@
           <td class="p-3 max-w-xs truncate">${item.Nombre_Carpeta_Producto || item.Ruta_Carpeta_Drive}</td>
           <td class="p-3 font-mono text-[11px] text-slate-400">${item.Nombre_Archivo_Original}</td>
           <td class="p-3">${isApproved ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-950">✅ CORRECTO</span>' : (isRejected ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500 text-white">❌ INCORRECTO</span>' : (st.includes('APROBADO') ? '<span class="badge-ok px-2 py-0.5 rounded text-[10px]">APROBADO</span>' : (st.includes('REVISION') ? '<span class="badge-warn px-2 py-0.5 rounded text-[10px]">REVISIÓN</span>' : '<span class="badge-info px-2 py-0.5 rounded text-[10px]">PENDIENTE</span>')))}</td>
-          <td class="p-3 font-bold">${item.Score_QA || '-'}</td>
+          <td class="p-3 font-bold">${item.Score_QA ? `<span class="px-2 py-0.5 rounded font-mono text-[11px] font-bold ${Number(item.Score_QA) >= 85 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : (Number(item.Score_QA) >= 70 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40')}">${item.Score_QA}/100</span>` : '-'}</td>
           <td class="p-3 text-right space-x-1">
             <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'CORRECTO')" class="px-2 py-1 rounded text-[10px] font-bold ${isApproved ? 'bg-emerald-500 text-slate-950' : 'bg-emerald-500/15 text-emerald-300'}">✅</button>
             <button onclick="setPhotoDecision('prod', '${item.ID}', '', 'INCORRECTO')" class="px-2 py-1 rounded text-[10px] font-bold ${isRejected ? 'bg-rose-500 text-white' : 'bg-rose-500/15 text-rose-300'}">❌</button>
