@@ -256,12 +256,11 @@
         <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
           <!-- Status Pill Filters -->
           <div class="flex flex-wrap gap-1.5" id="prodStatusFilterPills">
-            <button onclick="setProdFilter('VALIDAR')" id="filterBtn-VALIDAR" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-400 text-slate-950 transition">📋 Por Validar</button>
-            <button onclick="setProdFilter('CON_PRO')" id="filterBtn-CON_PRO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✨ Todas con Foto PRO</button>
-            <button onclick="setProdFilter('SIN_MARCAR')" id="filterBtn-SIN_MARCAR" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎯 Sin Marcar por Mí</button>
+            <button onclick="setProdFilter('VALIDAR')" id="filterBtn-VALIDAR" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-400 text-slate-950 transition shadow">📋 Por Validar</button>
             <button onclick="setProdFilter('APROBADO')" id="filterBtn-APROBADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✅ Aprobadas</button>
-            <button onclick="setProdFilter('RECHAZADO')" id="filterBtn-RECHAZADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">❌ Rechazadas / Corregir</button>
-            <button onclick="setProdFilter('PENDIENTE')" id="filterBtn-PENDIENTE" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⏳ Sin Foto PRO aún</button>
+            <button onclick="setProdFilter('RECHAZADO')" id="filterBtn-RECHAZADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">❌ Rechazadas</button>
+            <button onclick="setProdFilter('CON_PRO')" id="filterBtn-CON_PRO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✨ Con Foto PRO</button>
+            <button onclick="setProdFilter('PENDIENTE')" id="filterBtn-PENDIENTE" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⏳ Sin Foto PRO</button>
             <button onclick="setProdFilter('ALL')" id="filterBtn-ALL" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">📚 Todos</button>
           </div>
 
@@ -1227,7 +1226,7 @@
 
     // 4. RENDER PRODUCCIÓN (VALIDACIÓN TRI-COMPARATIVA DEL CATÁLOGO MAESTRO)
     let prodTriInitialized = false;
-    const PROD_FILTER_KEYS = ['VALIDAR', 'CON_PRO', 'SIN_MARCAR', 'APROBADO', 'RECHAZADO', 'PENDIENTE', 'ALL'];
+    const PROD_FILTER_KEYS = ['VALIDAR', 'APROBADO', 'RECHAZADO', 'CON_PRO', 'PENDIENTE', 'ALL'];
 
     function normalizeSearchText(str) {
       return String(str || '')
@@ -1238,7 +1237,7 @@
     }
 
     function updateProdFilterButtons() {
-      let cValidar = 0, cConPro = 0, cSinMarcar = 0, cAprobado = 0, cRechazado = 0, cPendiente = 0, cAll = 0;
+      let cValidar = 0, cAprobado = 0, cRechazado = 0, cConPro = 0, cPendiente = 0, cAll = 0;
       prodItems.forEach(item => {
         const st = String(item.Estado || '').toUpperCase();
         const proName = String(item.Nombre_Archivo_PRO || '');
@@ -1253,18 +1252,25 @@
         if (hasProOrRaw) cConPro++;
         else cPendiente++;
 
-        if (st.includes('REVISION') && hasProOrRaw) cValidar++;
-        if (hasProOrRaw && !dec) cSinMarcar++;
-        if (isWebApproved || (!isWebRejected && st.includes('APROBADO'))) cAprobado++;
-        if (isWebRejected || (!isWebApproved && st.includes('RECHAZADO'))) cRechazado++;
+        // Aprobadas: Aprobadas oficiales en Sheet o marcadas como Correcto en esta sesión
+        if (isWebApproved || (!isWebRejected && st.includes('APROBADO'))) {
+          cAprobado++;
+        }
+        // Rechazadas: Rechazadas en Sheet o marcadas como Incorrecto en esta sesión
+        else if (isWebRejected || (!isWebApproved && st.includes('RECHAZADO'))) {
+          cRechazado++;
+        }
+        // Por Validar: Tienen versión PRO pero aún están pendientes de veredicto
+        else if (hasProOrRaw) {
+          cValidar++;
+        }
       });
 
       const labels = {
         VALIDAR: `📋 Por Validar (${cValidar})`,
-        CON_PRO: `✨ Todas con Foto PRO (${cConPro})`,
-        SIN_MARCAR: `🎯 Sin Marcar por Mí (${cSinMarcar})`,
         APROBADO: `✅ Aprobadas (${cAprobado})`,
-        RECHAZADO: `❌ Rechazadas / Corregir (${cRechazado})`,
+        RECHAZADO: `❌ Rechazadas (${cRechazado})`,
+        CON_PRO: `✨ Con Foto PRO (${cConPro})`,
         PENDIENTE: `⏳ Sin Foto PRO (${cPendiente})`,
         ALL: `📚 Todos (${cAll})`
       };
@@ -1330,12 +1336,42 @@
         const isWebApproved = dec && dec.verdict === 'CORRECTO';
         const isWebRejected = dec && dec.verdict === 'INCORRECTO';
 
-        if (prodFilterState === 'VALIDAR' && (!st.includes('REVISION') || !hasProOrRaw)) return false;
-        if (prodFilterState === 'CON_PRO' && !hasProOrRaw) return false;
-        if (prodFilterState === 'SIN_MARCAR' && (!hasProOrRaw || Boolean(dec))) return false;
-        if (prodFilterState === 'APROBADO' && !(isWebApproved || (!isWebRejected && st.includes('APROBADO')))) return false;
-        if (prodFilterState === 'RECHAZADO' && !(isWebRejected || (!isWebApproved && st.includes('RECHAZADO')))) return false;
-        if (prodFilterState === 'PENDIENTE' && hasProOrRaw) return false;
+        if (prodFilterState === 'VALIDAR') {
+          // Por Validar: Tiene foto PRO pero no está aprobada ni rechazada
+          if (!hasProOrRaw) return false;
+          if (isWebApproved || isWebRejected) return false;
+          if (st.includes('APROBADO') || st.includes('RECHAZADO')) return false;
+        } else if (prodFilterState === 'APROBADO') {
+          if (!(isWebApproved || (!isWebRejected && st.includes('APROBADO')))) return false;
+        } else if (prodFilterState === 'RECHAZADO') {
+          if (!(isWebRejected || (!isWebApproved && st.includes('RECHAZADO')))) return false;
+        } else if (prodFilterState === 'CON_PRO') {
+          if (!hasProOrRaw) return false;
+        } else if (prodFilterState === 'PENDIENTE') {
+          if (hasProOrRaw) return false;
+        }
+
+        if (cat !== 'ALL') {
+          const cPath = normalizeSearchText(String(item.Ruta_Carpeta_Drive || '') + ' ' + String(item.Nombre_Carpeta_Producto || ''));
+          if (normCat === 'tocado') {
+            if (!cPath.includes('tocado') && !cPath.includes('arete') && !cPath.includes('escapulario') && !cPath.includes('gargantilla')) return false;
+          } else if (normCat === 'manto') {
+            if (!cPath.includes('manto') && !cPath.includes('faja')) return false;
+          } else if (normCat === 'sombrero') {
+            if (!cPath.includes('sombrero') && !cPath.includes('panuelo')) return false;
+          } else if (!cPath.includes(normCat)) {
+            return false;
+          }
+        }
+
+        if (search) {
+          if (/^d+$/.test(search) && String(item.ID) === search) return true;
+          const text = normalizeSearchText(String(item.ID) + ' ' + String(item.Nombre_Carpeta_Producto) + ' ' + String(item.Nombre_Archivo_Original) + ' ' + String(item.Ruta_Carpeta_Drive) + ' ' + String(item.Motivo_Rechazo || ''));
+          if (!text.includes(search)) return false;
+        }
+
+        return true;
+      });
 
         if (cat !== 'ALL') {
           const cPath = normalizeSearchText(String(item.Ruta_Carpeta_Drive || '') + ' ' + String(item.Nombre_Carpeta_Producto || ''));
