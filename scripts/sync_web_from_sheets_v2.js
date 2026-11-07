@@ -155,8 +155,9 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
     `<!-- Status Pill Filters -->
           <div class="flex flex-wrap gap-1.5" id="prodStatusFilterPills">
             <button onclick="setProdFilter('VALIDAR')" id="filterBtn-VALIDAR" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-400 text-slate-950 transition shadow">📋 Por Validar</button>
+            <button onclick="setProdFilter('V2_LISTAS')" id="filterBtn-V2_LISTAS" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✨ V2 Listas para Aprobar</button>
+            <button onclick="setProdFilter('RECHAZADO')" id="filterBtn-RECHAZADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🛠️ Faltan Corregir</button>
             <button onclick="setProdFilter('APROBADO')" id="filterBtn-APROBADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✅ Aprobadas</button>
-            <button onclick="setProdFilter('RECHAZADO')" id="filterBtn-RECHAZADO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">❌ Rechazadas</button>
             <button onclick="setProdFilter('CON_PRO')" id="filterBtn-CON_PRO" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✨ Con Foto PRO</button>
             <button onclick="setProdFilter('PENDIENTE')" id="filterBtn-PENDIENTE" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⏳ Sin Foto PRO</button>
             <button onclick="setProdFilter('ALL')" id="filterBtn-ALL" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">📚 Todos</button>
@@ -1213,7 +1214,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
     let prodTriInitialized = false;
     let prodCurrentPage = 1;
     let prodPageSize = 100;
-    const PROD_FILTER_KEYS = ['VALIDAR', 'APROBADO', 'RECHAZADO', 'CON_PRO', 'PENDIENTE', 'ALL'];
+    const PROD_FILTER_KEYS = ['VALIDAR', 'V2_LISTAS', 'RECHAZADO', 'APROBADO', 'CON_PRO', 'PENDIENTE', 'ALL'];
 
     function normalizeSearchText(str) {
       return String(str || '')
@@ -1295,13 +1296,14 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
     }
 
     function updateProdFilterButtons() {
-      let cValidar = 0, cAprobado = 0, cRechazado = 0, cConPro = 0, cPendiente = 0, cAll = 0;
+      let cValidar = 0, cV2Listas = 0, cAprobado = 0, cRechazado = 0, cConPro = 0, cPendiente = 0, cAll = 0;
       prodItems.forEach(item => {
         const st = String(item.Estado || '').toUpperCase();
         const proName = String(item.Nombre_Archivo_PRO || '');
         if (st.includes('RECHAZADO_QA') || proName.includes('ERROR_TEST')) return;
         cAll++;
         const hasProOrRaw = Boolean(extractDriveId(item.ID_Archivo_PRO) || extractDriveId(item.ID_Archivo_Gemini_Raw));
+        const hasV2 = Boolean(item.ID_Archivo_V2_Corregida || item.Link_Drive_V2_Corregida);
         const decKey = getDecisionKey('prod', item.ID);
         const dec = carlosDecisions[decKey];
         const isWebApproved = dec && dec.verdict === 'CORRECTO';
@@ -1309,6 +1311,10 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
         if (hasProOrRaw) cConPro++;
         else cPendiente++;
+
+        if (hasV2 && !isWebApproved) {
+          cV2Listas++;
+        }
 
         // Aprobadas: Aprobadas oficiales en Sheet o marcadas como Correcto en esta sesión
         if (isWebApproved || (!isWebRejected && st.includes('APROBADO'))) {
@@ -1326,6 +1332,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
       const labels = {
         VALIDAR: \`📋 Por Validar (\${cValidar})\`,
+        V2_LISTAS: \`✨ V2 Listas para Aprobar (\${cV2Listas})\`,
         RECHAZADO: \`🛠️ Faltan Corregir (\${cRechazado})\`,
         APROBADO: \`✅ Aprobadas (\${cAprobado})\`,
         CON_PRO: \`✨ Con Foto PRO (\${cConPro})\`,
@@ -1398,7 +1405,11 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
         const isWebApproved = dec && dec.verdict === 'CORRECTO';
         const isWebRejected = dec && dec.verdict === 'INCORRECTO';
 
-        if (prodFilterState === 'VALIDAR') {
+        if (prodFilterState === 'V2_LISTAS') {
+          const hasV2 = Boolean(item.ID_Archivo_V2_Corregida || item.Link_Drive_V2_Corregida);
+          if (!hasV2) return false;
+          if (isWebApproved) return false;
+        } else if (prodFilterState === 'VALIDAR') {
           // Por Validar: Tiene foto PRO pero no está aprobada ni rechazada
           if (!hasProOrRaw) return false;
           if (isWebApproved || isWebRejected) return false;
@@ -1473,6 +1484,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
       container.innerHTML = items.map(item => {
         const idCat = String(item.ID || '');
+        const decKey = getDecisionKey('prod', idCat);
+        const dec = carlosDecisions[decKey];
         const st = String(item.Estado || 'PENDIENTE').toUpperCase();
         const score = item.Score_QA || 95;
         const lat = item.Latencia_Seg || '8.5';
