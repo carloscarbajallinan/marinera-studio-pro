@@ -987,7 +987,7 @@
         origUrl, geminiRawUrl, pythonProUrl,
         origDriveLink, geminiRawLink, pythonProLink,
         hasDistinctGeminiRaw, hasPythonPro,
-        headerExtraBadges, analysis
+        headerExtraBadges, analysis, proFilename
       } = cfg;
 
       const decKey = getDecisionKey(scope, idCat, batchId);
@@ -1023,6 +1023,7 @@
               </div>
               <h3 class="text-base md:text-lg font-bold text-slate-100 pt-0.5">${title} <span class="text-xs font-normal text-amber-300 font-mono">(${analysis.mode})</span></h3>
               <p class="text-xs text-slate-400 font-mono truncate">📁 ${subpath}</p>
+              ${proFilename ? `<p class="text-xs text-emerald-300 font-mono flex items-center space-x-1.5 pt-0.5"><span>🏷️ Nombre Final:</span> <span class="bg-slate-900/90 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-bold">${proFilename}</span></p>` : ''}
             </div>
 
             <!-- Controles de Aprobación / Rechazo de Carlos -->
@@ -1390,6 +1391,7 @@
           batchId,
           title: `${origProd ? origProd.Nombre_Carpeta_Producto : 'Producto'} — ${item.Nombre_Archivo_Original || 'foto'}`,
           subpath: item.Categoria_Ruta || 'Marinera Power',
+          proFilename: origProd ? origProd.Nombre_Archivo_PRO : '',
           resVisual,
           badgeClass,
           score,
@@ -1728,6 +1730,7 @@
           batchId: '',
           title: `${item.Nombre_Carpeta_Producto || 'Producto'} — Archivo: ${item.Nombre_Archivo_Original}`,
           subpath: String(item.Ruta_Carpeta_Drive || 'Catálogo Marinera Power').replace(/Ã©/g, 'é').replace(/Ã±/g, 'ñ').replace(/Ã³/g, 'ó').replace(/Ã¡/g, 'á').replace(/Ã­/g, 'í'),
+          proFilename: item.Nombre_Archivo_PRO || '',
           resVisual: st,
           badgeClass,
           score,
