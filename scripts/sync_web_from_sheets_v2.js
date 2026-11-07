@@ -110,7 +110,16 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
   if (!content.includes('.photo-canvas')) {
     content = content.replace(
       '.modal-backdrop {',
-      `.photo-canvas {
+      `:root {
+      --tri-photo-height: 310px;
+    }
+    .tri-photo-box {
+      height: var(--tri-photo-height, 310px);
+      max-height: var(--tri-photo-height, 310px);
+      width: 100%;
+      aspect-ratio: 3/4;
+    }
+    .photo-canvas {
       background-color: #0A0D14;
       background-image: 
         linear-gradient(45deg, #101522 25%, transparent 25%), 
@@ -153,17 +162,27 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
             <button onclick="setProdFilter('ALL')" id="filterBtn-ALL" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">📚 Todos</button>
           </div>
 
-          <!-- View Mode (Tri-Comparativa 3 Fotos vs Cuadrícula vs Tabla) -->
-          <div class="flex items-center space-x-2">
-            <button onclick="setProdViewMode('tri')" id="btnViewTri" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
-              🔬 Tri-Comparativa (3 Fotos)
-            </button>
-            <button onclick="setProdViewMode('grid')" id="btnViewGrid" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white border border-slate-700">
-              🔲 Cuadrícula
-            </button>
-            <button onclick="setProdViewMode('table')" id="btnViewTable" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white border border-slate-700">
-              📋 Tabla
-            </button>
+          <!-- View Mode & Photo Height Controls (3 Fotos Simultáneas) -->
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center space-x-1.5">
+              <button onclick="setProdViewMode('tri')" id="btnViewTri" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                🔬 Tri-Comparativa (3 Fotos)
+              </button>
+              <button onclick="setProdViewMode('grid')" id="btnViewGrid" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white border border-slate-700">
+                🔲 Cuadrícula
+              </button>
+              <button onclick="setProdViewMode('table')" id="btnViewTable" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white border border-slate-700">
+                📋 Tabla
+              </button>
+            </div>
+
+            <!-- Selector de Altura de Fotos para que entren siempre en pantalla -->
+            <div class="flex items-center space-x-1 bg-slate-900 border border-slate-700/80 rounded-lg p-1 text-xs shadow-inner">
+              <span class="text-slate-400 px-1 text-[11px] font-semibold">📐 Alto:</span>
+              <button onclick="setTriPhotoHeight(240)" id="btnHeight240" class="px-2 py-0.5 rounded text-[11px] font-medium text-slate-300 hover:text-white">240px</button>
+              <button onclick="setTriPhotoHeight(310)" id="btnHeight310" class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-400 text-slate-950 shadow">310px</button>
+              <button onclick="setTriPhotoHeight(400)" id="btnHeight400" class="px-2 py-0.5 rounded text-[11px] font-medium text-slate-300 hover:text-white">400px</button>
+            </div>
           </div>
         </div>
 
@@ -224,6 +243,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
   const domRegex = /\/\/\s*INITIAL LOAD[\s\S]*?window\.addEventListener\('DOMContentLoaded'[\s\S]*?\}\);/;
   const newDom = `// INITIAL LOAD CON AUTO-SYNC EN VIVO Y POLLING CADA 25s
     window.addEventListener('DOMContentLoaded', () => {
+      const savedH = localStorage.getItem('marinera_tri_h') || 310;
+      if (typeof setTriPhotoHeight === 'function') setTriPhotoHeight(savedH);
       updateCounters();
       renderSandboxCards();
       switchTab('production');
@@ -260,6 +281,23 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
       carlosDecisions = JSON.parse(localStorage.getItem(QA_STORAGE_KEY) || '{}');
     } catch (e) {
       carlosDecisions = {};
+    }
+
+    function setTriPhotoHeight(h) {
+      try {
+        localStorage.setItem('marinera_tri_h', h);
+        document.documentElement.style.setProperty('--tri-photo-height', h + 'px');
+        ['240', '310', '400'].forEach(val => {
+          const b = document.getElementById('btnHeight' + val);
+          if (b) {
+            if (Number(val) === Number(h)) {
+              b.className = 'px-2 py-0.5 rounded text-[11px] font-bold bg-amber-400 text-slate-950 shadow';
+            } else {
+              b.className = 'px-2 py-0.5 rounded text-[11px] font-medium text-slate-300 hover:text-white';
+            }
+          }
+        });
+      } catch (e) {}
     }
 
     function saveCarlosDecisions() {
@@ -741,7 +779,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
         origUrl, geminiRawUrl, pythonProUrl,
         origDriveLink, geminiRawLink, pythonProLink,
         hasDistinctGeminiRaw, hasPythonPro,
-        headerExtraBadges, analysis, proFilename, motivoRechazo
+        headerExtraBadges, analysis, proFilename, motivoRechazo,
+        v2Name, v2Url
       } = cfg;
 
       const decKey = getDecisionKey(scope, idCat, batchId);
@@ -749,6 +788,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
       const isApproved = dec && dec.verdict === 'CORRECTO';
       const isRejected = dec && dec.verdict === 'INCORRECTO';
       const prefSource = (dec && dec.preferredSource) || 'PYTHON_PRO';
+      const isObservedOrV2 = Boolean(motivoRechazo || isRejected || v2Url);
 
       let borderStyle = 'border-slate-800';
       if (isApproved) borderStyle = 'border-emerald-500 ring-1 ring-emerald-500/40';
@@ -756,18 +796,18 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
       else if (cfg.isHighlighted) borderStyle = 'border-amber-500/40';
 
       return \`
-        <div class="bg-[#0C121E] border \${borderStyle} rounded-2xl overflow-hidden shadow-2xl p-5 md:p-6 space-y-4 transition">
+        <div class="bg-[#0C121E] border \${borderStyle} rounded-2xl overflow-hidden shadow-2xl p-3.5 sm:p-4 md:p-5 space-y-3 transition">
           
           <!-- Encabezado de Caso + Botones de Decisión Interactiva -->
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800/80 pb-4 gap-3">
-            <div class="space-y-1.5">
-              <div class="flex items-center flex-wrap gap-2">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800/80 pb-3 gap-2.5">
+            <div class="space-y-1">
+              <div class="flex items-center flex-wrap gap-1.5">
                 <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-400 text-slate-950 font-cinzel">ID #\${idCat}</span>
                 \${headerExtraBadges || ''}
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold \${badgeClass}">\${resVisual}</span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold \${badgeClass}">\${resVisual}</span>
                 
                 <!-- BADGE DESTACADO DEL SCORE TOTAL CON SEMÁFORO -->
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold border flex items-center space-x-1 \${analysis.scoreBadgeClass}">
+                <span class="px-2 py-0.5 rounded-full text-xs font-mono font-bold border flex items-center space-x-1 \${analysis.scoreBadgeClass}">
                   <span>\${analysis.scoreIcon}</span>
                   <span>Score QA: <strong>\${analysis.scoreNum}/100</strong> (\${analysis.scoreLabel})</span>
                 </span>
@@ -775,32 +815,32 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
                 <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border \${analysis.delta >= 45 ? 'border-rose-500/50 text-rose-300' : 'border-slate-700 text-indigo-300'} font-semibold">ΔE Fondo: \${analysis.delta}</span>
                 <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-900 border border-slate-700 text-emerald-300 font-semibold">Escala: \${analysis.escPython}</span>
               </div>
-              <h3 class="text-base md:text-lg font-bold text-slate-100 pt-0.5">\${title} <span class="text-xs font-normal text-amber-300 font-mono">(\${analysis.mode})</span></h3>
+              <h3 class="text-sm sm:text-base font-bold text-slate-100 pt-0.5">\${title} <span class="text-xs font-normal text-amber-300 font-mono">(\${analysis.mode})</span></h3>
               <p class="text-xs text-slate-400 font-mono truncate">📁 \${subpath}</p>
               \${proFilename ? \`<p class="text-xs text-emerald-300 font-mono flex items-center space-x-1.5 pt-0.5"><span>🏷️ Nombre Final:</span> <span class="bg-slate-900/90 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-bold">\${proFilename}</span></p>\` : ''}
             </div>
 
             <!-- Controles de Aprobación / Rechazo de Carlos -->
-            <div class="flex flex-col items-stretch sm:items-end gap-2">
-              <div class="flex flex-wrap items-center gap-2">
-                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'PYTHON_PRO')" class="px-3 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 \${isApproved && prefSource === 'PYTHON_PRO' ? 'bg-emerald-500 text-slate-950 shadow-lg' : 'bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/40'}">
-                  <span>✅ Correcto (Pulida Python)</span>
+            <div class="flex flex-col items-stretch sm:items-end gap-1.5">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'PYTHON_PRO')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1 \${isApproved && prefSource === 'PYTHON_PRO' ? 'bg-emerald-500 text-slate-950 shadow-lg' : 'bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/40'}">
+                  <span>✅ Correcto (Python)</span>
                 </button>
-                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'GEMINI_RAW')" class="px-3 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 \${isApproved && prefSource === 'GEMINI_RAW' ? 'bg-sky-400 text-slate-950 shadow-lg' : 'bg-sky-500/15 text-sky-300 hover:bg-sky-500/25 border border-sky-500/40'}">
-                  <span>✅ Correcto (Gemini Puro)</span>
+                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'GEMINI_RAW')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1 \${isApproved && prefSource === 'GEMINI_RAW' ? 'bg-sky-400 text-slate-950 shadow-lg' : 'bg-sky-500/15 text-sky-300 hover:bg-sky-500/25 border border-sky-500/40'}">
+                  <span>✅ Correcto (Gemini)</span>
                 </button>
-                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'INCORRECTO')" class="px-3 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 \${isRejected ? 'bg-rose-500 text-white shadow-lg' : 'bg-rose-500/15 text-rose-300 hover:bg-rose-500/25 border border-rose-500/40'}">
-                  <span>❌ Incorrecto (Reintentar)</span>
+                <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'INCORRECTO')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1 \${isRejected ? 'bg-rose-500 text-white shadow-lg' : 'bg-rose-500/15 text-rose-300 hover:bg-rose-500/25 border border-rose-500/40'}">
+                  <span>❌ Rechazar</span>
                 </button>
-                <button onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${pythonProUrl || geminiRawUrl}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${pythonProLink || geminiRawLink}', '\${scope}', '\${batchId}')" class="px-2.5 py-2 rounded-xl text-xs font-semibold bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 border border-amber-500/30 transition" title="Abrir Slider Interactivo">
+                <button onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${v2Url || pythonProUrl || geminiRawUrl}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${v2Url || pythonProLink || geminiRawLink}', '\${scope}', '\${batchId}')" class="px-2 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 border border-amber-500/30 transition" title="Abrir Comparador Slider">
                   ↔️ Slider
                 </button>
               </div>
               \${isRejected ? \`
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full bg-rose-950/30 border border-rose-500/40 rounded-xl p-2">
-                  <div class="flex items-center space-x-1.5">
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 w-full bg-rose-950/30 border border-rose-500/40 rounded-lg p-1.5">
+                  <div class="flex items-center space-x-1">
                     <span class="text-[10px] text-rose-300 font-semibold whitespace-nowrap">Motivo:</span>
-                    <select onchange="setPhotoReason('\${scope}', '\${idCat}', '\${batchId}', this.value)" class="bg-slate-950 border border-rose-500/40 rounded-lg px-2 py-1 text-[11px] text-slate-200 focus:outline-none focus:border-rose-400">
+                    <select onchange="setPhotoReason('\${scope}', '\${idCat}', '\${batchId}', this.value)" class="bg-slate-950 border border-rose-500/40 rounded px-2 py-0.5 text-[11px] text-slate-200 focus:outline-none focus:border-rose-400">
                       <option value="Cambió la prenda / diseño" \${(dec.presetReason || dec.reason) === 'Cambió la prenda / diseño' ? 'selected' : ''}>Cambió la prenda / diseño</option>
                       <option value="Borró base de madera del maniquí" \${(dec.presetReason || dec.reason) === 'Borró base de madera del maniquí' ? 'selected' : ''}>Borró base de madera del maniquí</option>
                       <option value="Cortó partes del accesorio / producto" \${(dec.presetReason || dec.reason) === 'Cortó partes del accesorio / producto' ? 'selected' : ''}>Cortó partes del accesorio / producto</option>
@@ -817,8 +857,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
                   <input type="text"
                     value="\${String(dec.customNote || '').replace(/"/g, '&quot;')}"
                     oninput="setPhotoCustomNote('\${scope}', '\${idCat}', '\${batchId}', this.value)"
-                    placeholder="Detalle específico (ej: falta base de madera, cambió prenda, cortó accesorio...)"
-                    class="flex-1 min-w-[240px] bg-slate-950 border border-rose-500/40 rounded-lg px-2.5 py-1 text-[11px] text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-400"
+                    placeholder="Detalle específico..."
+                    class="flex-1 min-w-[200px] bg-slate-950 border border-rose-500/40 rounded px-2 py-0.5 text-[11px] text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-400"
                   />
                 </div>
               \` : ''}
@@ -827,176 +867,203 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
           \${motivoRechazo ? \`
             <!-- ALERTA DESTACADA DE FOTO RECHAZADA / FALTA CORREGIR -->
-            <div class="bg-rose-950/60 border-2 border-rose-500 rounded-xl p-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-2xl">
-              <div class="flex items-start space-x-3">
-                <span class="text-2xl">🛠️</span>
-                <div>
-                  <h4 class="text-xs font-black text-rose-300 uppercase tracking-wider flex items-center space-x-1.5">
-                    <span>FALTA CORREGIR</span>
-                    <span class="text-slate-400">|</span>
-                    <span class="text-white">Observación Registrada:</span>
-                  </h4>
-                  <p class="text-base font-extrabold text-white mt-0.5">"\${motivoRechazo}"</p>
-                  <p class="text-xs text-rose-200/90 mt-1">📌 Pauta: Se creará una nueva imagen corregida usando la foto original como base, guardándose aparte como V2 sin sobreescribir la actual.</p>
+            <div class="bg-rose-950/70 border border-rose-500/80 rounded-xl px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-lg">
+              <div class="flex items-center space-x-2.5 min-w-0">
+                <span class="text-xl">🛠️</span>
+                <div class="min-w-0">
+                  <div class="flex items-center space-x-2 flex-wrap">
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded bg-rose-500 text-white tracking-wider uppercase">FALTA CORREGIR</span>
+                    <span class="text-xs font-bold text-white truncate">Observación: "\${motivoRechazo}"</span>
+                  </div>
                 </div>
               </div>
-              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-slate-900 text-amber-300 border border-amber-500/40 text-center whitespace-nowrap">
-                  🔄 Nueva Versión V2 Aparte
+              <div class="flex items-center space-x-2 shrink-0">
+                <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold \${v2Url ? 'bg-emerald-950/90 text-emerald-300 border border-emerald-500/50' : 'bg-slate-950 text-amber-300 border border-amber-500/40'} whitespace-nowrap">
+                  \${v2Url ? '✨ V2 Lista para Aprobar al lado derecho ➔' : '⏳ Pendiente Generación V2 Aparte'}
                 </span>
               </div>
             </div>
           \` : ''}
 
-          <!-- BANNER GUÍA DE REVISIÓN: EN QUÉ DEBES ENFOCARTE ANTES DE INDICAR SI FALLÓ O NO -->
-          <div class="bg-slate-900/90 border border-slate-700/80 rounded-xl p-3.5 space-y-2 shadow-inner">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center space-x-1.5">
+          <!-- GUÍA DE REVISIÓN DESPLEGABLE (NO OCUPA ESPACIO POR DEFECTO) -->
+          <details class="group bg-slate-900/90 border border-slate-700/80 rounded-xl overflow-hidden shadow-inner">
+            <summary class="px-3 py-2 flex items-center justify-between cursor-pointer select-none hover:bg-slate-800/60 transition text-xs font-bold text-amber-300">
+              <div class="flex items-center space-x-2 min-w-0">
                 <span>🎯</span>
-                <span>En qué enfocarte al revisar esta foto:</span>
-              </span>
-              <span class="text-[10px] text-slate-400 font-mono">Auditoría Automática Python / OpenCV</span>
+                <span class="truncate">En qué enfocarte al revisar: <span class="text-slate-300 font-normal">Score: <strong>\${analysis.scoreNum}/100</strong> • ΔE: <strong>\${analysis.delta}</strong> • Escala: <strong>\${analysis.escPython}</strong></span></span>
+              </div>
+              <span class="text-[10px] text-slate-400 group-open:rotate-180 transition-transform shrink-0 ml-2">▼ Ver checklist</span>
+            </summary>
+            <div class="p-3 border-t border-slate-800/80 space-y-2 bg-slate-950/50">
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-slate-300">
+                \${analysis.focusPoints.map(pt => \`
+                  <li class="flex items-start space-x-1.5 bg-slate-950/70 p-1.5 rounded-lg border border-slate-800">
+                    <span class="text-amber-400 font-bold">•</span>
+                    <span>\${pt}</span>
+                  </li>
+                \`).join('')}
+              </ul>
+              <div class="pt-1 text-[10px] text-slate-400 font-mono truncate border-t border-slate-800 flex items-center space-x-2">
+                <span class="text-slate-500 font-semibold">Registro Técnico:</span>
+                <span class="text-slate-400 truncate" title="\${analysis.obsRaw}">\${analysis.obsRaw}</span>
+              </div>
             </div>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300">
-              \${analysis.focusPoints.map(pt => \`
-                <li class="flex items-start space-x-1.5 bg-slate-950/60 p-2 rounded-lg border border-slate-800">
-                  <span class="text-amber-400 font-bold">•</span>
-                  <span>\${pt}</span>
-                </li>
-              \`).join('')}
-            </ul>
-            <div class="pt-1 text-[10px] text-slate-400 font-mono truncate border-t border-slate-800/80 flex items-center space-x-2">
-              <span class="text-slate-500 font-semibold">Registro Técnico:</span>
-              <span class="text-slate-400 truncate" title="\${analysis.obsRaw}">\${analysis.obsRaw}</span>
-            </div>
-          </div>
+          </details>
 
-          <!-- Grilla Tri-Comparativa (3 Columnas: 1. Original | 2. Gemini 2.5 Flash | 3. Pulida Post-Python) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          <!-- Grilla Tri-Comparativa (SIEMPRE 3 Columnas Simultáneas en Pantalla) -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-stretch">
             
             <!-- Columna 1: Foto Cruda Original -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-slate-800/80 p-3 space-y-2">
+            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-slate-800/80 p-2 sm:p-2.5 space-y-1.5">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>📷</span> <span>1. Foto Cruda Original</span>
+                <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                  <span>📷</span> <span class="hidden sm:inline">1. Foto Original</span><span class="sm:hidden">1. Original</span>
                 </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-black border border-slate-800 text-slate-300 font-mono font-bold">
-                  Base Referencia 1:1
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-black border border-slate-800 text-slate-300 font-mono font-bold whitespace-nowrap">
+                  Base 1:1
                 </span>
               </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${origUrl}" class="w-full h-full object-contain" alt="1. Foto Original" loading="lazy">
+              <div class="photo-canvas zoom-container tri-photo-box rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center shadow-inner">
+                <img src="\${origUrl}" class="w-full h-full object-contain cursor-pointer" alt="1. Foto Original" loading="lazy" onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${isObservedOrV2 ? (v2Url || pythonProUrl || geminiRawUrl) : (pythonProUrl || geminiRawUrl)}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${origDriveLink}', '\${scope}', '\${batchId}')">
               </div>
               <div class="text-[10px] text-slate-400 flex items-center justify-between px-1">
-                <span>Archivo de origen en catálogo</span>
-                <a href="\${origDriveLink}" target="_blank" class="font-mono text-amber-400 hover:underline">Abrir en Drive ↗</a>
+                <span class="truncate">📁 Origen</span>
+                <a href="\${origDriveLink}" target="_blank" class="font-mono text-amber-400 hover:underline shrink-0">Drive ↗</a>
               </div>
             </div>
 
-            <!-- Columna 2: Versión Pura Gemini 2.5 Flash (_1_RAW_GEMINI) -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-sky-500/40 p-3 space-y-2 shadow-lg">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>🤖</span> <span>2. Versión Gemini 2.5 Flash</span>
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-sky-950/80 border border-sky-500/50 text-sky-300 font-mono font-bold">
-                  Escala: \${analysis.escGemini}
-                </span>
+            \${isObservedOrV2 ? \`
+              <!-- Columna 2 (OBSERVADA / RECHAZADA): Versión con Observación -->
+              <div class="flex flex-col bg-slate-950/70 rounded-xl border border-rose-500/50 p-2 sm:p-2.5 space-y-1.5 shadow-lg">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-rose-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                    <span>⚠️</span> <span class="hidden sm:inline">2. Observada</span><span class="sm:hidden">2. Obs</span>
+                  </span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-950/90 border border-rose-500/60 text-rose-300 font-mono font-bold truncate max-w-[110px]" title="\${motivoRechazo || 'Rechazada'}">
+                    ❌ Obs
+                  </span>
+                </div>
+                <div class="photo-canvas zoom-container tri-photo-box rounded-lg overflow-hidden border border-rose-500/40 flex items-center justify-center shadow-inner">
+                  <img src="\${pythonProUrl || geminiRawUrl}" class="w-full h-full object-contain cursor-pointer" alt="2. Versión Observada" loading="lazy" onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${pythonProUrl || geminiRawUrl}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${pythonProLink || geminiRawLink}', '\${scope}', '\${batchId}')">
+                </div>
+                <div class="text-[10px] text-rose-300/90 flex items-center justify-between px-1 font-medium">
+                  <span class="truncate" title="\${motivoRechazo || 'Observación registrada'}">❌ \${motivoRechazo ? motivoRechazo.slice(0, 22) + '...' : 'Observada'}</span>
+                  <a href="\${pythonProLink || geminiRawLink}" target="_blank" class="font-mono text-rose-300 hover:underline shrink-0">Drive ↗</a>
+                </div>
               </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-sky-500/40 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${geminiRawUrl}" class="w-full h-full object-contain" alt="2. Salida Gemini" loading="lazy">
-              </div>
-              <div class="text-[10px] text-sky-300/90 flex items-center justify-between px-1 font-medium">
-                <span>📁 Carpeta: _1_RAW_GEMINI</span>
-                <a href="\${geminiRawLink}" target="_blank" class="font-mono text-sky-300 hover:underline">Abrir RAW Drive ↗</a>
-              </div>
-            </div>
 
-            <!-- Columna 3: Versión Pulida Post-Python (_2_MESA_REVISION_CARLOS) -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-emerald-500/40 p-3 space-y-2 shadow-lg">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>🐍</span> <span>3. Versión Pulida Python</span>
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-mono font-bold">
-                  Escala: \${analysis.escPython}
-                </span>
+              <!-- Columna 3 (CORREGIDA V2): Nueva Versión V2 o Placeholder en cola -->
+              \${v2Url ? \`
+                <div class="flex flex-col bg-emerald-950/30 rounded-xl border-2 border-emerald-500/90 p-2 sm:p-2.5 space-y-1.5 shadow-xl ring-1 ring-emerald-500/40">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                      <span>✨</span> <span class="hidden sm:inline">3. Nueva V2 Corregida</span><span class="sm:hidden">3. V2 Corregida</span>
+                    </span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold whitespace-nowrap">
+                      Lista para Aprobar
+                    </span>
+                  </div>
+                  <div class="photo-canvas zoom-container tri-photo-box rounded-lg overflow-hidden border border-emerald-500/50 flex items-center justify-center shadow-inner">
+                    <img src="\${v2Url}" class="w-full h-full object-contain cursor-pointer" alt="3. Versión V2 Corregida" loading="lazy" onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${v2Url}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${v2Url}', '\${scope}', '\${batchId}')">
+                  </div>
+                  <div class="flex items-center space-x-1.5 pt-0.5">
+                    <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'V2_CORREGIDA')" class="flex-1 py-1.5 px-2 rounded-lg text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition shadow flex items-center justify-center space-x-1 font-cinzel">
+                      <span>✅</span> <span>Aprobar V2</span>
+                    </button>
+                    <a href="\${v2Url}" target="_blank" class="px-2 py-1.5 rounded-lg text-[11px] font-semibold bg-slate-900 text-emerald-300 border border-emerald-500/40 hover:bg-slate-800 transition shrink-0" title="Ver imagen en tamaño completo">
+                      Ver ↗
+                    </a>
+                  </div>
+                </div>
+              \` : \`
+                <div class="flex flex-col bg-slate-950/70 rounded-xl border border-amber-500/40 p-2 sm:p-2.5 space-y-1.5 shadow-lg">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                      <span>🔄</span> <span class="hidden sm:inline">3. Nueva V2</span><span class="sm:hidden">3. V2</span>
+                    </span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-950/80 border border-amber-500/50 text-amber-300 font-mono font-bold whitespace-nowrap">
+                      En Cola
+                    </span>
+                  </div>
+                  <div class="tri-photo-box rounded-lg overflow-hidden border border-amber-500/30 flex flex-col items-center justify-center p-2.5 text-center space-y-1.5 bg-slate-900/60">
+                    <span class="text-2xl animate-pulse">⏳</span>
+                    <p class="text-xs font-bold text-amber-300">Pendiente Generar V2</p>
+                    <p class="text-[10px] text-slate-300 line-clamp-2">Pauta: <strong class="text-amber-200">\${motivoRechazo || 'Corrección'}</strong></p>
+                  </div>
+                  <div class="text-[10px] text-slate-400 flex items-center justify-between px-1">
+                    <span class="truncate">📁 Se creará aparte</span>
+                    <span class="font-mono text-amber-400 shrink-0">Sin borrar</span>
+                  </div>
+                </div>
+              \`}
+            \` : \`
+              <!-- Columna 2 (NORMAL): Gemini 2.5 Flash (_1_RAW_GEMINI) -->
+              <div class="flex flex-col bg-slate-950/70 rounded-xl border border-sky-500/40 p-2 sm:p-2.5 space-y-1.5 shadow-lg">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                    <span>🤖</span> <span class="hidden sm:inline">2. Gemini RAW</span><span class="sm:hidden">2. Gemini</span>
+                  </span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-950/80 border border-sky-500/50 text-sky-300 font-mono font-bold whitespace-nowrap">
+                    \${analysis.escGemini}
+                  </span>
+                </div>
+                <div class="photo-canvas zoom-container tri-photo-box rounded-lg overflow-hidden border border-sky-500/40 flex items-center justify-center shadow-inner">
+                  <img src="\${geminiRawUrl}" class="w-full h-full object-contain cursor-pointer" alt="2. Salida Gemini" loading="lazy" onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${geminiRawUrl}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${geminiRawLink}', '\${scope}', '\${batchId}')">
+                </div>
+                <div class="text-[10px] text-sky-300/90 flex items-center justify-between px-1 font-medium">
+                  <span class="truncate">📁 _1_RAW_GEMINI</span>
+                  <a href="\${geminiRawLink}" target="_blank" class="font-mono text-sky-300 hover:underline shrink-0">Drive ↗</a>
+                </div>
               </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-emerald-500/40 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${pythonProUrl}" class="w-full h-full object-contain" alt="3. Pulida Python" loading="lazy">
+
+              <!-- Columna 3 (NORMAL): Versión Pulida Python (_2_MESA_REVISION_CARLOS) -->
+              <div class="flex flex-col bg-slate-950/70 rounded-xl border border-emerald-500/40 p-2 sm:p-2.5 space-y-1.5 shadow-lg">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1 truncate">
+                    <span>🐍</span> <span class="hidden sm:inline">3. Versión Python</span><span class="sm:hidden">3. Python</span>
+                  </span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-mono font-bold whitespace-nowrap">
+                    \${analysis.escPython}
+                  </span>
+                </div>
+                <div class="photo-canvas zoom-container tri-photo-box rounded-lg overflow-hidden border border-emerald-500/40 flex items-center justify-center shadow-inner">
+                  <img src="\${pythonProUrl}" class="w-full h-full object-contain cursor-pointer" alt="3. Pulida Python" loading="lazy" onclick="openModalCompare('\${idCat}', '\${origUrl}', '\${pythonProUrl}', '\${resVisual}', '\${score}', '\${analysis.delta}', '\${pythonProLink}', '\${scope}', '\${batchId}')">
+                </div>
+                <div class="text-[10px] text-emerald-300/90 flex items-center justify-between px-1 font-semibold">
+                  <span class="truncate">📁 _2_MESA_REVISION</span>
+                  <a href="\${pythonProLink}" target="_blank" class="font-mono text-emerald-300 hover:underline shrink-0">Drive ↗</a>
+                </div>
               </div>
-              <div class="text-[10px] text-emerald-300/90 flex items-center justify-between px-1 font-semibold">
-                <span>📁 Carpeta: _2_MESA_REVISION_CARLOS</span>
-                <a href="\${pythonProLink}" target="_blank" class="font-mono text-emerald-300 hover:underline">Abrir PRO Drive ↗</a>
-              </div>
-            </div>
+            \`}
 
           </div>
 
-          <!-- Diagnóstico en Dos Bloques: Lo Positivo y Lo Negativo / Correcciones Python -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
-            
-            <!-- Bloque Positivo -->
-            <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-4 space-y-2">
-              <h4 class="font-bold text-emerald-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
-                <span>🟢</span> <span>Lo Positivo (Logros de Gemini + Pulido Python):</span>
-              </h4>
-              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
-                \${analysis.positivo.map(p => \`<li class="flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">✓</span><span>\${p}</span></li>\`).join('')}
-              </ul>
-            </div>
-
-            <!-- Bloque Negativo / Observaciones -->
-            <div class="bg-rose-950/20 border border-rose-500/30 rounded-xl p-4 space-y-2">
-              <h4 class="font-bold text-rose-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
-                <span>🔴</span> <span>Lo Negativo / Correcciones Aplicadas por Python:</span>
-              </h4>
-              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
-                \${analysis.negativo.map(n => \`<li class="flex items-start space-x-1.5"><span class="text-rose-400 font-bold">•</span><span>\${n}</span></li>\`).join('')}
-              </ul>
-            </div>
-
-          </div>
-
-          \${v2Url ? \`
-            <!-- SECCIÓN DESTACADA: NUEVA VERSIÓN CORREGIDA V2 -->
-            <div class="mt-4 bg-emerald-950/40 border-2 border-emerald-500/80 rounded-2xl p-4 shadow-2xl space-y-3">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-emerald-500/30 gap-2">
-                <div class="flex items-center space-x-2">
-                  <span class="text-2xl">✨</span>
-                  <div>
-                    <h4 class="text-xs font-black text-emerald-300 uppercase tracking-wider flex items-center space-x-1.5">
-                      <span>NUEVA VERSIÓN CORREGIDA (V2 GENERADA APARTE)</span>
-                      <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-bold">Lista para Revisar</span>
-                    </h4>
-                    <p class="text-xs text-slate-200 mt-0.5">Generada corrigiendo el motivo: <strong class="text-amber-300">\${motivoRechazo || 'Observación previa'}</strong></p>
-                  </div>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'V2_CORREGIDA')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition shadow-lg flex items-center space-x-1">
-                    <span>✅</span> <span>Aprobar Esta Versión V2</span>
-                  </button>
-                  <a href="\${v2Url}" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-emerald-300 border border-emerald-500/40 hover:bg-slate-800 transition">
-                    Ver Imagen ↗
-                  </a>
-                </div>
+          <!-- Diagnóstico Técnico Plegable (Lo Positivo / Negativo) -->
+          <details class="group bg-slate-900/60 border border-slate-800/80 rounded-xl overflow-hidden text-xs">
+            <summary class="px-3 py-1.5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-800/40 transition font-semibold text-slate-400 text-[11px]">
+              <span>📊 Ver Diagnóstico Técnico Detallado (Positivo vs Correcciones)</span>
+              <span class="text-[10px] text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <div class="p-3 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-950/40">
+              <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-3 space-y-1.5">
+                <h4 class="font-bold text-emerald-400 flex items-center space-x-1.5 text-[11px] uppercase tracking-wider">
+                  <span>🟢</span> <span>Lo Positivo:</span>
+                </h4>
+                <ul class="space-y-1 text-slate-300 text-[11px] leading-relaxed">
+                  \${analysis.positivo.map(p => \`<li class="flex items-start space-x-1"><span class="text-emerald-400 font-bold">✓</span><span>\${p}</span></li>\`).join('')}
+                </ul>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <div class="aspect-[3/4] max-h-[440px] bg-slate-950 rounded-xl overflow-hidden border border-emerald-500/50 flex items-center justify-center p-2 shadow-inner">
-                  <img src="\${v2Url}" class="w-full h-full object-contain" alt="Versión V2 Corregida" loading="lazy">
-                </div>
-                <div class="space-y-3 text-xs text-slate-300">
-                  <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 space-y-2">
-                    <p class="font-bold text-emerald-300 flex items-center space-x-1"><span>🔍</span> <span>Mejoras aplicadas en esta versión:</span></p>
-                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Silueta y proporciones:</strong> Preservación 1:1 de cortes, faldas y mangas respecto al original.</span></p>
-                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Fondo comercial limpio:</strong> Fondo blanco sólido puro (#FFFFFF) sin logos, marcos ni bordes laterales.</span></p>
-                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Archivo independiente:</strong> Guardada en Drive sin sobreescribir el historial (<code class="text-amber-300 font-mono">\${v2Name || 'V2_CORREGIDA'}</code>).</span></p>
-                  </div>
-                  <p class="text-[11px] text-slate-400 italic">Al hacer clic en "Aprobar Esta Versión V2", este archivo sustituirá a la versión observada para la entrega final con el nombre comercial combinado.</p>
-                </div>
+
+              <div class="bg-rose-950/20 border border-rose-500/30 rounded-xl p-3 space-y-1.5">
+                <h4 class="font-bold text-rose-400 flex items-center space-x-1.5 text-[11px] uppercase tracking-wider">
+                  <span>🔴</span> <span>Correcciones Python:</span>
+                </h4>
+                <ul class="space-y-1 text-slate-300 text-[11px] leading-relaxed">
+                  \${analysis.negativo.map(n => \`<li class="flex items-start space-x-1"><span class="text-rose-400 font-bold">•</span><span>\${n}</span></li>\`).join('')}
+                </ul>
               </div>
             </div>
-          \` : ''}
+          </details>
 
         </div>
       \`;
@@ -1613,8 +1680,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 });
 
 try {
-  execSync('git add docs/ index.html', { cwd: repoDir });
-  execSync('git commit -m "feat(sync): sincronizar datasets completos de Sandbox y Maestro con auto-polling"', { cwd: repoDir });
+  execSync('git add docs/ index.html v2_corregidas/ scripts/sync_web_from_sheets_v2.js', { cwd: repoDir });
+  execSync('git commit -m "feat(ui): grilla tri-comparativa 3 fotos simultaneas con altura ajustable y V2 integrada"', { cwd: repoDir });
   execSync('git push origin main:master', { cwd: repoDir });
   console.log('Push exitoso a GitHub Pages!');
 } catch (e) {
