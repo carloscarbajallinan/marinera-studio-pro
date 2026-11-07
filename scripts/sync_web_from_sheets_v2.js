@@ -69,7 +69,10 @@ const prodItems = rowsPr.slice(1).map(r => {
     Ruta_Destino_PRO: r[23] || '',
     Ubicacion_Actual_Fisica: r[24] || '',
     Motivo_Rechazo: r[25] || '',
-    Version_Prompt: r[26] || ''
+    Version_Prompt: r[26] || '',
+    ID_Archivo_V2_Corregida: r[27] || '',
+    Link_Drive_V2_Corregida: r[28] || '',
+    Fecha_Creacion_V2: r[29] || ''
   };
 });
 
@@ -738,7 +741,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
         origUrl, geminiRawUrl, pythonProUrl,
         origDriveLink, geminiRawLink, pythonProLink,
         hasDistinctGeminiRaw, hasPythonPro,
-        headerExtraBadges, analysis, proFilename
+        headerExtraBadges, analysis, proFilename, motivoRechazo
       } = cfg;
 
       const decKey = getDecisionKey(scope, idCat, batchId);
@@ -821,6 +824,29 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
               \` : ''}
             </div>
           </div>
+
+          \${motivoRechazo ? \`
+            <!-- ALERTA DESTACADA DE FOTO RECHAZADA / FALTA CORREGIR -->
+            <div class="bg-rose-950/60 border-2 border-rose-500 rounded-xl p-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-2xl">
+              <div class="flex items-start space-x-3">
+                <span class="text-2xl">🛠️</span>
+                <div>
+                  <h4 class="text-xs font-black text-rose-300 uppercase tracking-wider flex items-center space-x-1.5">
+                    <span>FALTA CORREGIR</span>
+                    <span class="text-slate-400">|</span>
+                    <span class="text-white">Observación Registrada:</span>
+                  </h4>
+                  <p class="text-base font-extrabold text-white mt-0.5">"\${motivoRechazo}"</p>
+                  <p class="text-xs text-rose-200/90 mt-1">📌 Pauta: Se creará una nueva imagen corregida usando la foto original como base, guardándose aparte como V2 sin sobreescribir la actual.</p>
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-slate-900 text-amber-300 border border-amber-500/40 text-center whitespace-nowrap">
+                  🔄 Nueva Versión V2 Aparte
+                </span>
+              </div>
+            </div>
+          \` : ''}
 
           <!-- BANNER GUÍA DE REVISIÓN: EN QUÉ DEBES ENFOCARTE ANTES DE INDICAR SI FALLÓ O NO -->
           <div class="bg-slate-900/90 border border-slate-700/80 rounded-xl p-3.5 space-y-2 shadow-inner">
@@ -1291,8 +1317,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
         if (isWebApproved || (!isWebRejected && st.includes('APROBADO'))) {
           cAprobado++;
         }
-        // Rechazadas: Rechazadas en Sheet o marcadas como Incorrecto en esta sesión
-        else if (isWebRejected || (!isWebApproved && st.includes('RECHAZADO'))) {
+        // Rechazadas / Faltan Corregir: Rechazadas en Sheet o marcadas como Incorrecto en esta sesión o con motivo registrado
+        else if (isWebRejected || (!isWebApproved && (st.includes('RECHAZADO') || (item.Motivo_Rechazo && !st.includes('APROBADO'))))) {
           cRechazado++;
         }
         // Por Validar: Tienen versión PRO pero aún están pendientes de veredicto
@@ -1303,8 +1329,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
       const labels = {
         VALIDAR: \`📋 Por Validar (\${cValidar})\`,
+        RECHAZADO: \`🛠️ Faltan Corregir (\${cRechazado})\`,
         APROBADO: \`✅ Aprobadas (\${cAprobado})\`,
-        RECHAZADO: \`❌ Rechazadas (\${cRechazado})\`,
         CON_PRO: \`✨ Con Foto PRO (\${cConPro})\`,
         PENDIENTE: \`⏳ Sin Foto PRO (\${cPendiente})\`,
         ALL: \`📚 Todos (\${cAll})\`
@@ -1379,11 +1405,11 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
           // Por Validar: Tiene foto PRO pero no está aprobada ni rechazada
           if (!hasProOrRaw) return false;
           if (isWebApproved || isWebRejected) return false;
-          if (st.includes('APROBADO') || st.includes('RECHAZADO')) return false;
+          if (st.includes('APROBADO') || st.includes('RECHAZADO') || item.Motivo_Rechazo) return false;
         } else if (prodFilterState === 'APROBADO') {
           if (!(isWebApproved || (!isWebRejected && st.includes('APROBADO')))) return false;
         } else if (prodFilterState === 'RECHAZADO') {
-          if (!(isWebRejected || (!isWebApproved && st.includes('RECHAZADO')))) return false;
+          if (!(isWebRejected || (!isWebApproved && (st.includes('RECHAZADO') || (item.Motivo_Rechazo && !st.includes('APROBADO')))))) return false;
         } else if (prodFilterState === 'CON_PRO') {
           if (!hasProOrRaw) return false;
         } else if (prodFilterState === 'PENDIENTE') {
@@ -1496,6 +1522,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
           hasPythonPro: Boolean(pythonProId),
           headerExtraBadges: verBadge + (sheetRejectNote ? ' ' + sheetRejectNote : ''),
           isHighlighted: st.includes('REVISION'),
+          motivoRechazo: item.Motivo_Rechazo || (dec && dec.reason) || '',
           analysis
         });
       }).join('');
