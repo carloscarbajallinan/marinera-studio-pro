@@ -958,115 +958,45 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
 
           </div>
 
-        </div>
-      \`;
-                      <option value="No quitó logo de pared / fondo" \${(dec.presetReason || dec.reason) === 'No quitó logo de pared / fondo' ? 'selected' : ''}>No quitó logo de pared / fondo</option>
-                      <option value="Muy cerca (Zoom-in) / encuadre cortado" \${(dec.presetReason || dec.reason) === 'Muy cerca (Zoom-in) / encuadre cortado' ? 'selected' : ''}>Muy cerca (Zoom-in) / encuadre cortado</option>
-                      <option value="Alejó sujeto (Zoom-out)" \${(dec.presetReason || dec.reason) === 'Alejó sujeto (Zoom-out)' ? 'selected' : ''}>Alejó sujeto (Zoom-out)</option>
-                      <option value="Inventó pies o pañuelo" \${(dec.presetReason || dec.reason) === 'Inventó pies o pañuelo' ? 'selected' : ''}>Inventó pies o pañuelo</option>
-                      <option value="Cambió forma de falda / corte" \${(dec.presetReason || dec.reason) === 'Cambió forma de falda / corte' ? 'selected' : ''}>Cambió forma de falda / corte</option>
-                      <option value="Bordes blancos laterales (Manual)" \${(dec.presetReason || dec.reason) === 'Bordes blancos laterales (Manual)' ? 'selected' : ''}>Bordes blancos laterales (Manual)</option>
-                      <option value="Deriva de color en fondo" \${(dec.presetReason || dec.reason) === 'Deriva de color en fondo' ? 'selected' : ''}>Deriva de color en fondo</option>
-                      <option value="Otro (Especificar al lado)" \${(dec.presetReason || dec.reason) === 'Otro (Especificar al lado)' ? 'selected' : ''}>Otro (Especificar al lado)</option>
-                    </select>
+          \${v2Url ? \`
+            <!-- SECCIÓN DESTACADA: NUEVA VERSIÓN CORREGIDA V2 -->
+            <div class="mt-4 bg-emerald-950/40 border-2 border-emerald-500/80 rounded-2xl p-4 shadow-2xl space-y-3">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-emerald-500/30 gap-2">
+                <div class="flex items-center space-x-2">
+                  <span class="text-2xl">✨</span>
+                  <div>
+                    <h4 class="text-xs font-black text-emerald-300 uppercase tracking-wider flex items-center space-x-1.5">
+                      <span>NUEVA VERSIÓN CORREGIDA (V2 GENERADA APARTE)</span>
+                      <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-bold">Lista para Revisar</span>
+                    </h4>
+                    <p class="text-xs text-slate-200 mt-0.5">Generada corrigiendo el motivo: <strong class="text-amber-300">\${motivoRechazo || 'Observación previa'}</strong></p>
                   </div>
-                  <input type="text"
-                    value="\${String(dec.customNote || '').replace(/"/g, '&quot;')}"
-                    oninput="setPhotoCustomNote('\${scope}', '\${idCat}', '\${batchId}', this.value)"
-                    placeholder="Detalle específico (ej: falta base de madera, cambió prenda, cortó accesorio...)"
-                    class="flex-1 min-w-[240px] bg-slate-950 border border-rose-500/40 rounded-lg px-2.5 py-1 text-[11px] text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-400"
-                  />
                 </div>
-              \` : ''}
-            </div>
-          </div>
-
-          <!-- Grilla Tri-Comparativa (3 Columnas: 1. Original | 2. Gemini 2.5 Flash | 3. Pulida Post-Python) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-            
-            <!-- Columna 1: Foto Cruda Original -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-slate-800/80 p-3 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>📷</span> <span>1. Foto Cruda Original</span>
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-black border border-slate-800 text-slate-300 font-mono font-bold">
-                  Base Referencia 1:1
-                </span>
+                <div class="flex items-center space-x-2">
+                  <button onclick="setPhotoDecision('\${scope}', '\${idCat}', '\${batchId}', 'CORRECTO', '', 'V2_CORREGIDA')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition shadow-lg flex items-center space-x-1">
+                    <span>✅</span> <span>Aprobar Esta Versión V2</span>
+                  </button>
+                  <a href="\${v2Url}" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-emerald-300 border border-emerald-500/40 hover:bg-slate-800 transition">
+                    Ver Imagen ↗
+                  </a>
+                </div>
               </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${origUrl}" class="w-full h-full object-contain" alt="1. Foto Original" loading="lazy">
-              </div>
-              <div class="text-[10px] text-slate-400 flex items-center justify-between px-1">
-                <span>Archivo de origen en catálogo</span>
-                <a href="\${origDriveLink}" target="_blank" class="font-mono text-amber-400 hover:underline">Abrir en Drive ↗</a>
-              </div>
-            </div>
-
-            <!-- Columna 2: Versión Pura Gemini 2.5 Flash (_1_RAW_GEMINI) -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-sky-500/40 p-3 space-y-2 shadow-lg">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>🤖</span> <span>2. Versión Gemini 2.5 Flash</span>
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-sky-950/80 border border-sky-500/50 text-sky-300 font-mono font-bold">
-                  Escala: \${analysis.escGemini}
-                </span>
-              </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-sky-500/40 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${geminiRawUrl}" class="w-full h-full object-contain" alt="2. Salida Gemini" loading="lazy">
-              </div>
-              <div class="text-[10px] text-sky-300/90 flex items-center justify-between px-1 font-medium">
-                <span>📁 Carpeta: _1_RAW_GEMINI</span>
-                <a href="\${geminiRawLink}" target="_blank" class="font-mono text-sky-300 hover:underline">Abrir RAW Drive ↗</a>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                <div class="aspect-[3/4] max-h-[440px] bg-slate-950 rounded-xl overflow-hidden border border-emerald-500/50 flex items-center justify-center p-2 shadow-inner">
+                  <img src="\${v2Url}" class="w-full h-full object-contain" alt="Versión V2 Corregida" loading="lazy">
+                </div>
+                <div class="space-y-3 text-xs text-slate-300">
+                  <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 space-y-2">
+                    <p class="font-bold text-emerald-300 flex items-center space-x-1"><span>🔍</span> <span>Mejoras aplicadas en esta versión:</span></p>
+                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Silueta y proporciones:</strong> Preservación 1:1 de cortes, faldas y mangas respecto al original.</span></p>
+                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Fondo comercial limpio:</strong> Fondo blanco sólido puro (#FFFFFF) sin logos, marcos ni bordes laterales.</span></p>
+                    <p class="text-slate-200 flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">•</span><span><strong>Archivo independiente:</strong> Guardada en Drive sin sobreescribir el historial (<code class="text-amber-300 font-mono">\${v2Name || 'V2_CORREGIDA'}</code>).</span></p>
+                  </div>
+                  <p class="text-[11px] text-slate-400 italic">Al hacer clic en "Aprobar Esta Versión V2", este archivo sustituirá a la versión observada para la entrega final con el nombre comercial combinado.</p>
+                </div>
               </div>
             </div>
-
-            <!-- Columna 3: Versión Pulida Post-Python (_2_MESA_REVISION_CARLOS) -->
-            <div class="flex flex-col bg-slate-950/70 rounded-xl border border-emerald-500/40 p-3 space-y-2 shadow-lg">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider flex items-center space-x-1">
-                  <span>🐍</span> <span>3. Versión Pulida Python</span>
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-mono font-bold">
-                  Escala: \${analysis.escPython}
-                </span>
-              </div>
-              <div class="photo-canvas zoom-container aspect-[3/4] max-h-[480px] w-full rounded-lg overflow-hidden border border-emerald-500/40 flex items-center justify-center p-2 shadow-inner">
-                <img src="\${pythonProUrl}" class="w-full h-full object-contain" alt="3. Pulida Python" loading="lazy">
-              </div>
-              <div class="text-[10px] text-emerald-300/90 flex items-center justify-between px-1 font-semibold">
-                <span>📁 Carpeta: _2_MESA_REVISION_CARLOS</span>
-                <a href="\${pythonProLink}" target="_blank" class="font-mono text-emerald-300 hover:underline">Abrir PRO Drive ↗</a>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Diagnóstico en Dos Bloques: Lo Positivo y Lo Negativo / Correcciones Python -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
-            
-            <!-- Bloque Positivo -->
-            <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-4 space-y-2">
-              <h4 class="font-bold text-emerald-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
-                <span>🟢</span> <span>Lo Positivo (Logros de Gemini + Pulido Python):</span>
-              </h4>
-              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
-                \${analysis.positivo.map(p => \`<li class="flex items-start space-x-1.5"><span class="text-emerald-400 font-bold">✓</span><span>\${p}</span></li>\`).join('')}
-              </ul>
-            </div>
-
-            <!-- Bloque Negativo / Observaciones -->
-            <div class="bg-rose-950/20 border border-rose-500/30 rounded-xl p-4 space-y-2">
-              <h4 class="font-bold text-rose-400 flex items-center space-x-2 text-xs uppercase tracking-wider">
-                <span>🔴</span> <span>Lo Negativo / Correcciones Aplicadas por Python:</span>
-              </h4>
-              <ul class="space-y-1.5 text-slate-300 text-[11px] leading-relaxed">
-                \${analysis.negativo.map(n => \`<li class="flex items-start space-x-1.5"><span class="text-rose-400 font-bold">•</span><span>\${n}</span></li>\`).join('')}
-              </ul>
-            </div>
-
-          </div>
+          \` : ''}
 
         </div>
       \`;
@@ -1523,6 +1453,8 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
           headerExtraBadges: verBadge + (sheetRejectNote ? ' ' + sheetRejectNote : ''),
           isHighlighted: st.includes('REVISION'),
           motivoRechazo: item.Motivo_Rechazo || (dec && dec.reason) || '',
+          v2Name: item.ID_Archivo_V2_Corregida || '',
+          v2Url: item.Link_Drive_V2_Corregida || (item.ID_Archivo_V2_Corregida ? 'v2_corregidas/' + item.ID_Archivo_V2_Corregida : ''),
           analysis
         });
       }).join('');
