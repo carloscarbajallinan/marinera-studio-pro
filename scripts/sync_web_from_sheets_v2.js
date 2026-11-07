@@ -107,7 +107,7 @@ const rootHtmlPath = path.join(repoDir, 'index.html');
   }
 
   // Inyectar estilos photo-canvas y zoom-container (estilo Canary_Test_Marinera_Power.html) si no existen
-  if (!content.includes('.photo-canvas')) {
+  if (!content.includes('.tri-photo-box')) {
     content = content.replace(
       '.modal-backdrop {',
       `:root {

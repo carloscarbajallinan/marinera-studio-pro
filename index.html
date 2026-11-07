@@ -100,6 +100,35 @@
       transform: scale(1.6);
       z-index: 20;
     }
+    :root {
+      --tri-photo-height: 310px;
+    }
+    .tri-photo-box {
+      height: var(--tri-photo-height, 310px);
+      max-height: var(--tri-photo-height, 310px);
+      width: 100%;
+      aspect-ratio: 3/4;
+    }
+    .photo-canvas {
+      background-color: #0A0D14;
+      background-image: 
+        linear-gradient(45deg, #101522 25%, transparent 25%), 
+        linear-gradient(-45deg, #101522 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #101522 75%), 
+        linear-gradient(-45deg, transparent 75%, #101522 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      position: relative;
+      cursor: crosshair;
+    }
+    .zoom-container img {
+      transition: transform 0.25s ease-out;
+      transform-origin: center center;
+    }
+    .zoom-container:hover img {
+      transform: scale(1.6);
+      z-index: 20;
+    }
     .modal-backdrop {
       background: rgba(4, 7, 13, 0.88);
       backdrop-filter: blur(8px);
