@@ -304,6 +304,30 @@
         </div>
       </div>
 
+      <!-- BARRA DE PAGINACIÓN SUPERIOR (DESPLAZADOR AL INICIO) -->
+      <div id="prodPaginationTopBar" class="bg-[#121927] border border-amber-500/30 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+        <div class="flex items-center space-x-2 text-xs text-slate-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+          <span id="prodShowingCountTop" class="font-medium text-amber-200">Mostrando fotos...</span>
+          <span class="text-slate-600">|</span>
+          <span id="prodPageIndicatorTop" class="font-mono text-amber-300 font-bold">Página 1</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="flex items-center space-x-1" id="prodPaginationButtonsTop">
+            <!-- Botones dinámicos generados por JS -->
+          </div>
+          <div class="flex items-center space-x-1 pl-2 border-l border-slate-700">
+            <span class="text-[11px] text-slate-400">Ver:</span>
+            <select id="prodPageSizeSelect" onchange="setProdPageSize(Number(this.value))" class="bg-slate-900 border border-slate-700 text-xs text-amber-300 font-semibold rounded-lg px-2 py-1 focus:outline-none focus:border-amber-400">
+              <option value="50">50 por pág</option>
+              <option value="100" selected>100 por pág</option>
+              <option value="200">200 por pág</option>
+              <option value="9999">Todas sin paginar</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <!-- CATALOG ITEMS CONTAINER -->
       <div id="prodCardsContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         <!-- Dynamic Cards -->
@@ -1226,6 +1250,8 @@
 
     // 4. RENDER PRODUCCIÓN (VALIDACIÓN TRI-COMPARATIVA DEL CATÁLOGO MAESTRO)
     let prodTriInitialized = false;
+    let prodCurrentPage = 1;
+    let prodPageSize = 100;
     const PROD_FILTER_KEYS = ['VALIDAR', 'APROBADO', 'RECHAZADO', 'CON_PRO', 'PENDIENTE', 'ALL'];
 
     function normalizeSearchText(str) {
@@ -1234,6 +1260,77 @@
         .replace(/Ã±/g, 'n').replace(/Ã‰/g, 'e').replace(/Ã‘/g, 'n')
         .normalize('NFD').replace(/[̀-ͯ]/g, '')
         .toLowerCase();
+    }
+
+    function setProdPage(pageNum) {
+      prodCurrentPage = pageNum;
+      renderProductionView(false);
+      const topBar = document.getElementById('prodPaginationTopBar');
+      if (topBar) topBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function setProdPageSize(size) {
+      prodPageSize = size;
+      prodCurrentPage = 1;
+      renderProductionView(false);
+    }
+
+    function renderPaginationControls(totalItems) {
+      const totalPages = Math.ceil(totalItems / prodPageSize) || 1;
+      if (prodCurrentPage > totalPages) prodCurrentPage = 1;
+
+      const startIdx = totalItems === 0 ? 0 : (prodCurrentPage - 1) * prodPageSize + 1;
+      const endIdx = Math.min(prodCurrentPage * prodPageSize, totalItems);
+
+      const showingText = totalItems === 0
+        ? '0 fotos encontradas'
+        : `Mostrando <strong class="text-white">${startIdx} - ${endIdx}</strong> de <strong class="text-white">${totalItems}</strong> fotos`;
+      const pageText = `Página <strong class="text-amber-400">${prodCurrentPage}</strong> de <strong class="text-white">${totalPages}</strong>`;
+
+      ['Top', ''].forEach(suffix => {
+        const elCount = document.getElementById(suffix === 'Top' ? 'prodShowingCountTop' : 'prodShowingCount');
+        const elPage = document.getElementById(suffix === 'Top' ? 'prodPageIndicatorTop' : null);
+        const elBtns = document.getElementById(suffix === 'Top' ? 'prodPaginationButtonsTop' : 'prodPagination');
+
+        if (elCount) elCount.innerHTML = showingText;
+        if (elPage) elPage.innerHTML = pageText;
+        if (!elBtns) return;
+
+        if (totalPages <= 1) {
+          elBtns.innerHTML = '';
+          return;
+        }
+
+        let html = '';
+        // Botón Anterior
+        html += `<button onclick="setProdPage(${prodCurrentPage - 1})" ${prodCurrentPage === 1 ? 'disabled class="px-2.5 py-1 rounded-lg text-xs text-slate-600 bg-slate-900 border border-slate-800 cursor-not-allowed"' : 'class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow-sm"'}>◀️ Ant</button>`;
+
+        // Rango de botones numéricos
+        let pageRange = [];
+        if (totalPages <= 7) {
+          pageRange = Array.from({ length: totalPages }, (_, i) => i + 1);
+        } else {
+          const left = Math.max(1, prodCurrentPage - 2);
+          const right = Math.min(totalPages, prodCurrentPage + 2);
+          if (left > 1) { pageRange.push(1); if (left > 2) pageRange.push('...'); }
+          for (let p = left; p <= right; p++) pageRange.push(p);
+          if (right < totalPages) { if (right < totalPages - 1) pageRange.push('...'); pageRange.push(totalPages); }
+        }
+
+        pageRange.forEach(p => {
+          if (p === '...') {
+            html += `<span class="px-1 text-slate-600 text-xs">...</span>`;
+          } else {
+            const isActive = p === prodCurrentPage;
+            html += `<button onclick="setProdPage(${p})" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${isActive ? 'bg-amber-400 text-slate-950 shadow-md font-black' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'}">${p}</button>`;
+          }
+        });
+
+        // Botón Siguiente
+        html += `<button onclick="setProdPage(${prodCurrentPage + 1})" ${prodCurrentPage === totalPages ? 'disabled class="px-2.5 py-1 rounded-lg text-xs text-slate-600 bg-slate-900 border border-slate-800 cursor-not-allowed"' : 'class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow-sm"'}>Sig ▶️</button>`;
+
+        elBtns.innerHTML = html;
+      });
     }
 
     function updateProdFilterButtons() {
@@ -1289,8 +1386,9 @@
 
     function setProdFilter(state) {
       prodFilterState = state;
+      prodCurrentPage = 1;
       updateProdFilterButtons();
-      renderProductionView();
+      renderProductionView(false);
     }
 
     function setProdViewMode(mode) {
@@ -1304,19 +1402,22 @@
 
       document.getElementById('prodCardsContainer').classList.toggle('hidden', mode === 'table');
       document.getElementById('prodTableContainer').classList.toggle('hidden', mode !== 'table');
-      renderProductionView();
+      renderProductionView(false);
     }
 
     function applyProdFilters() {
-      renderProductionView();
+      prodCurrentPage = 1;
+      renderProductionView(false);
     }
 
-    function renderProductionView() {
+    function renderProductionView(resetPage = false) {
       if (!prodTriInitialized) {
         prodTriInitialized = true;
         prodFilterState = 'VALIDAR';
         prodViewMode = 'tri';
       }
+      if (resetPage) prodCurrentPage = 1;
+
       renderCarlosDecisionBar();
       updateProdFilterButtons();
 
@@ -1373,28 +1474,6 @@
         return true;
       });
 
-        if (cat !== 'ALL') {
-          const cPath = normalizeSearchText(String(item.Ruta_Carpeta_Drive || '') + ' ' + String(item.Nombre_Carpeta_Producto || ''));
-          if (normCat === 'tocado') {
-            if (!cPath.includes('tocado') && !cPath.includes('arete') && !cPath.includes('escapulario') && !cPath.includes('gargantilla')) return false;
-          } else if (normCat === 'manto') {
-            if (!cPath.includes('manto') && !cPath.includes('faja')) return false;
-          } else if (normCat === 'sombrero') {
-            if (!cPath.includes('sombrero') && !cPath.includes('panuelo')) return false;
-          } else if (!cPath.includes(normCat)) {
-            return false;
-          }
-        }
-
-        if (search) {
-          if (/^d+$/.test(search) && String(item.ID) === search) return true;
-          const text = normalizeSearchText(String(item.ID) + ' ' + String(item.Nombre_Carpeta_Producto) + ' ' + String(item.Nombre_Archivo_Original) + ' ' + String(item.Ruta_Carpeta_Drive) + ' ' + String(item.Motivo_Rechazo || ''));
-          if (!text.includes(search)) return false;
-        }
-
-        return true;
-      });
-
       // Ordenar por ID numérico ascendente dentro de cada grupo
       filtered.sort((a, b) => {
         const aHasBoth = Boolean(extractDriveId(a.ID_Archivo_Gemini_Raw) && extractDriveId(a.ID_Archivo_PRO)) ? 1 : 0;
@@ -1406,14 +1485,20 @@
         return Number(a.ID || 0) - Number(b.ID || 0);
       });
 
-      document.getElementById('prodShowingCount').textContent = `Mostrando ${filtered.length} de ${prodItems.length} productos`;
+      // Paginación: 100 imágenes por página
+      const totalItems = filtered.length;
+      renderPaginationControls(totalItems);
+
+      const startIdx = (prodCurrentPage - 1) * prodPageSize;
+      const endIdx = startIdx + prodPageSize;
+      const pageItems = filtered.slice(startIdx, endIdx);
 
       if (prodViewMode === 'tri') {
-        renderProdTriComparative(filtered);
+        renderProdTriComparative(pageItems);
       } else if (prodViewMode === 'grid') {
-        renderProdGrid(filtered);
+        renderProdGrid(pageItems);
       } else {
-        renderProdTable(filtered);
+        renderProdTable(pageItems);
       }
     }
 
